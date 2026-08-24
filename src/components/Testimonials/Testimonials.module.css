@@ -1,0 +1,230 @@
+.section {
+  padding: var(--section-pad) 0;
+  background: var(--color-surface-grey);
+}
+
+.head {
+  text-align: center;
+}
+
+.title {
+  padding-top: 16px;
+}
+
+.carousel {
+  max-width: 896px;
+  margin: 64px auto 0;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  --slide-step: -100%;
+  display: flex;
+  transform: translateX(calc(var(--index) * var(--slide-step)));
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide {
+  flex: 0 0 100%;
+  padding: 0 16px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 48px;
+}
+
+.quoteIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.quote {
+  padding-top: 24px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 48.75px;
+  color: var(--color-ink);
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 32px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-ink);
+}
+
+.role {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-muted);
+}
+
+.stars {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 32px;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+  border: 1px solid var(--color-hairline);
+  transition: background var(--transition);
+}
+
+.control:hover {
+  background: rgba(26, 26, 26, 0.04);
+}
+
+.controlIcon {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1279px) {
+  .card {
+    padding: 32px;
+  }
+
+  .quote {
+    font-size: 24px;
+    line-height: 40px;
+  }
+}
+
+/* ===== Mobile (430 design) ===== */
+@media (max-width: 767px) {
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .title {
+    padding-top: 0;
+  }
+
+  .carousel {
+    margin-top: 32px;
+  }
+
+  .viewport {
+    /* let the neighbouring cards peek past the container padding */
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .track {
+    --slide-step: -358px;
+  }
+
+  .slide {
+    flex: 0 0 350px;
+    padding: 0;
+    margin-right: 8px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .quoteIcon {
+    display: none;
+  }
+
+  .quote {
+    padding-top: 0;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .person {
+    gap: 8px;
+    padding-top: 20px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .name {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 24px;
+    color: #0a0a0a;
+  }
+
+  .role {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .stars {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    margin-left: 0;
+    gap: 2px;
+  }
+
+  .star {
+    width: 9.213px;
+    height: 9.213px;
+  }
+
+  .controls {
+    padding-top: 24px;
+  }
+
+  .control {
+    width: 39px;
+    height: 39px;
+    padding: 10.87px;
+    border-width: 0.87px;
+  }
+
+  .controlIcon {
+    width: 17.391px;
+    height: 17.391px;
+  }
+}

@@ -1,0 +1,288 @@
+.section {
+  padding: var(--section-pad) 0;
+  background: var(--color-surface-grey);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* --- Visual column --- */
+.visual {
+  position: relative;
+}
+
+.imageWrap {
+  position: relative;
+  height: 1090px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.accentSquare {
+  position: absolute;
+  left: 704px;
+  top: 922px;
+  width: 192px;
+  height: 192px;
+  background: rgba(201, 169, 98, 0.1);
+}
+
+.badge {
+  position: absolute;
+  left: -24px;
+  top: 48px;
+  width: 120.547px;
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid var(--color-hairline);
+}
+
+.badgeValue {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  color: var(--color-ink);
+}
+
+.badgeLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-muted);
+}
+
+/* --- Copy column --- */
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  padding-top: 16px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(32px, 2.5vw, 48px);
+  line-height: 1.25;
+  letter-spacing: -0.96px;
+  color: var(--color-ink);
+}
+
+.titleAccent {
+  display: block;
+  font-style: italic;
+}
+
+.paragraph {
+  padding-top: 24px;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+  margin: 40px 0;
+  padding-top: 33px;
+  border-top: 1px solid #e5e2dc;
+}
+
+/* Desktop: the pair dissolves so all three stats are grid items */
+.statPair {
+  display: contents;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  color: var(--color-ink);
+}
+
+.statLabel {
+  padding-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-muted);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 48px;
+  padding: 13px 25px;
+  border: 1px solid var(--color-ink-strong);
+  border-radius: 4px;
+  background-image: var(--button-dark);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.35px;
+  transition: opacity var(--transition);
+}
+
+.cta:hover {
+  opacity: 0.88;
+}
+
+.ctaIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.mobileBadge {
+  display: none;
+}
+
+@media (max-width: 1279px) {
+  .grid {
+    gap: 40px;
+  }
+
+  .imageWrap {
+    height: 720px;
+  }
+
+  .accentSquare {
+    left: auto;
+    right: -24px;
+    top: auto;
+    bottom: -24px;
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .imageWrap {
+    height: 520px;
+  }
+}
+
+/* ===== Mobile (430 design) ===== */
+@media (max-width: 767px) {
+  .grid {
+    gap: 18px;
+  }
+
+  .visual {
+    order: 2;
+  }
+
+  .copy {
+    order: 1;
+    align-items: stretch;
+    padding: 10px 0;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .title {
+    padding-top: 0;
+    font-size: 36px;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+
+  .titleAccent {
+    font-style: normal;
+  }
+
+  .paragraph {
+    padding-top: 32px;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .paragraphExtra {
+    display: none;
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 24px 0 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .statFirst .statValue {
+    font-size: 38px;
+    line-height: 46px;
+  }
+
+  .statPair {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .statPair > * {
+    width: 168px;
+  }
+
+  .cta {
+    display: none;
+  }
+
+  .imageWrap {
+    height: 496px;
+  }
+
+  .accentSquare {
+    display: none;
+  }
+
+  .badge {
+    display: none;
+  }
+
+  .mobileBadge {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    left: 261px;
+    top: 414px;
+    padding: 9px;
+    background: #ffffff;
+    border: 1px solid var(--color-hairline);
+  }
+
+  .mobileBadge .badgeValue {
+    font-size: 18px;
+    line-height: normal;
+  }
+
+  .mobileBadge .badgeLabel {
+    font-size: 12px;
+  }
+}

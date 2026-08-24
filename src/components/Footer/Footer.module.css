@@ -1,0 +1,492 @@
+.footer {
+  padding-top: 60px;
+  background: var(--color-dark);
+}
+
+.inner {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 15.008px;
+}
+
+/* ===== Top row: pitch / chair / links ===== */
+.topRow {
+  display: flex;
+  align-items: center;
+}
+
+.cell {
+  flex: 1 0 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 389.594px;
+  border: 1px solid var(--color-footer-line);
+}
+
+.cellPitch {
+  align-items: flex-start;
+  padding: 81px 41px;
+}
+
+.cellChair {
+  align-items: center;
+  justify-content: center;
+  padding: 81px;
+}
+
+.cellLinks {
+  align-items: center;
+  justify-content: center;
+  padding: 81px 41px;
+}
+
+.pitchTitle {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #ffffff;
+}
+
+.pitchBody {
+  padding-top: 10px;
+  max-width: 474px;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pitchButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  margin-top: 24px;
+  padding: 12px 24px;
+  border: 1px solid var(--color-ink-strong);
+  background-image: var(--button-light);
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  transition: opacity var(--transition);
+}
+
+.pitchButton:hover {
+  opacity: 0.88;
+}
+
+.pitchButtonIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.chairWrap {
+  position: relative;
+  width: 249.301px;
+  height: 338.406px;
+}
+
+.chairImage {
+  position: absolute;
+  left: 21.65px;
+  top: 0;
+  width: 206px;
+  height: 332px;
+  object-fit: contain;
+}
+
+.chairEllipse {
+  position: absolute;
+  left: 0;
+  top: 274.133px;
+  width: 249.301px;
+  height: 64.273px;
+}
+
+.linkColumns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 336px;
+}
+
+.linkColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.linkHeading {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-neutral-100);
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-brand-300);
+}
+
+.linkList a {
+  transition: color var(--transition);
+}
+
+.linkList a:hover {
+  color: #ffffff;
+}
+
+/* ===== Socials row ===== */
+.socialRow {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-footer-line);
+}
+
+.socialLabelCell {
+  flex: 518.62 0 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding: 24px 21px;
+  border-left: 1px solid var(--color-footer-line);
+  border-right: 1px solid var(--color-footer-line);
+}
+
+.socialLabel {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.socialCell {
+  min-width: 0;
+  flex: 212 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding: 24px 23px 24px 22px;
+  border-right: 1px solid var(--color-footer-line);
+}
+
+.socialCell:nth-of-type(4),
+.socialCell:nth-of-type(5) {
+  flex-grow: 248;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.socialName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 25.6px;
+  color: var(--color-brand-400);
+  white-space: nowrap;
+}
+
+.socialCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background var(--transition);
+}
+
+.socialLink:hover .socialCircle {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.socialIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== Bottom row ===== */
+.bottomRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 222px;
+  background: var(--color-dark);
+}
+
+.wordmark {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 26.341px;
+  height: 160px;
+  margin: 30.7px 0 0 41px;
+  opacity: 0.8;
+  font-family: var(--font-wordmark);
+  font-weight: 600;
+  font-size: 125px;
+  line-height: 1.28;
+  letter-spacing: 4.1657px;
+  color: rgba(255, 255, 255, 0.38);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.wordmark span {
+  opacity: 0.09;
+}
+
+.legal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  max-width: 550px;
+  padding: 30px 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-brand-400);
+  white-space: nowrap;
+}
+
+/* Desktop: links sit inline with the copyright, separated by rules */
+.legalLinks {
+  display: contents;
+}
+
+.legalDivider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-brand-400);
+  opacity: 0.4;
+}
+
+.mobileSocialRow {
+  display: none;
+}
+
+@media (max-width: 1439px) {
+  .wordmark {
+    font-size: 8.6vw;
+    height: auto;
+  }
+}
+
+@media (max-width: 1279px) {
+  .topRow {
+    flex-wrap: wrap;
+  }
+
+  .cell {
+    flex: 1 0 50%;
+    height: auto;
+    min-height: 320px;
+    padding: 48px 32px;
+  }
+
+  .cellChair {
+    padding: 32px;
+  }
+
+  .socialLabelCell {
+    flex: 1 0 100%;
+  }
+
+  .socialRow {
+    flex-wrap: wrap;
+  }
+
+  .socialCell {
+    flex: 1 0 0;
+  }
+
+  .socialName {
+    font-size: 14px;
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .wordmark {
+    margin: 24px 0 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .cell {
+    flex: 1 0 100%;
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .wordmark {
+    margin: 24px 0 0;
+  }
+}
+
+/* ===== Mobile (430 design) ===== */
+@media (max-width: 767px) {
+  .footer {
+    padding-top: 60px;
+  }
+
+  .inner {
+    padding: 0;
+  }
+
+  .topRow {
+    flex-direction: column;
+  }
+
+  .cell {
+    flex: none;
+    width: 100%;
+    min-height: 0;
+    border: 0;
+    padding: 0 16px;
+  }
+
+  .cellChair {
+    order: -1;
+    padding: 0;
+  }
+
+  .chairWrap {
+    width: 249.301px;
+    height: 338.406px;
+    margin: 0 auto;
+  }
+
+  .cellPitch {
+    padding-top: 40px;
+  }
+
+  .pitchBody {
+    padding-top: 12px;
+    max-width: none;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .pitchButton {
+    width: 216px;
+    height: 44px;
+    margin-top: 24px;
+    padding: 13px 25px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .pitchButtonIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cellLinks {
+    align-items: flex-start;
+    padding: 40px 16px 0;
+  }
+
+  .linkColumns {
+    width: 100%;
+  }
+
+  .linkColumn {
+    width: 159px;
+  }
+
+  .linkList {
+    gap: 16px;
+  }
+
+  /* Desktop socials row is replaced by the compact mobile row */
+  .socialRow {
+    display: none;
+  }
+
+  .mobileSocialRow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px 16px 0;
+  }
+
+  .mobileSocialLabel {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    color: #ffffff;
+  }
+
+  .mobileSocialIcons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 0;
+    padding: 0;
+  }
+
+  .wordmark {
+    height: auto;
+    margin: 40px 16px 0;
+    gap: 8px;
+    font-size: 13vw;
+    letter-spacing: 2.2px;
+    justify-content: space-between;
+  }
+
+  .legal {
+    max-width: none;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 10px;
+    padding: 12px 0 24px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .legalLinks {
+    display: flex;
+    gap: 20px;
+  }
+
+  .legalDivider {
+    display: none;
+  }
+}
