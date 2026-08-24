@@ -17,7 +17,12 @@ const COMPANY_LINKS = [
   "Contact Us",
 ];
 
-const SOCIALS = ["Instagram", "Twitter", "Facebook", "Linkedin"];
+const SOCIALS = [
+  { name: "Instagram", icon: "/images/icon-social-instagram.svg" },
+  { name: "Twitter", icon: "/images/icon-social-twitter.svg" },
+  { name: "Facebook", icon: "/images/icon-social-facebook.svg" },
+  { name: "Linkedin", icon: "/images/icon-social-linkedin.svg" },
+];
 
 export default function Footer() {
   return (
@@ -94,7 +99,7 @@ export default function Footer() {
           <div className={styles.socialLabelCell}>
             <p className={styles.socialLabel}>Also available on socials :</p>
           </div>
-          {SOCIALS.map((name) => (
+          {SOCIALS.map(({ name }) => (
             <div key={name} className={styles.socialCell}>
               <a href="#" className={styles.socialLink}>
                 <span className={styles.socialName}>{name}</span>
@@ -116,7 +121,7 @@ export default function Footer() {
         <div className={styles.mobileSocialRow}>
           <p className={styles.mobileSocialLabel}>Also available on socials :</p>
           <div className={styles.mobileSocialIcons}>
-            {SOCIALS.map((name) => (
+            {SOCIALS.map(({ name, icon }) => (
               <a
                 key={name}
                 href="#"
@@ -124,11 +129,11 @@ export default function Footer() {
                 aria-label={name}
               >
                 <Image
-                  src="/images/icon-social-arrow.svg"
+                  src={icon}
                   alt=""
-                  width={16}
-                  height={16}
-                  className={styles.socialIcon}
+                  width={20}
+                  height={20}
+                  className={styles.socialGlyph}
                 />
               </a>
             ))}

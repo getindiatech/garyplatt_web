@@ -227,6 +227,12 @@
   height: 16px;
 }
 
+/* Mobile footer: 20px brand glyph inside the 32px circle, per the 430 frame. */
+.socialGlyph {
+  width: 20px;
+  height: 20px;
+}
+
 /* ===== Bottom row ===== */
 .bottomRow {
   display: flex;
