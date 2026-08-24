@@ -1,5 +1,5 @@
 .header {
-  position: absolute;
+  position: fixed;
   inset: 0 0 auto 0;
   z-index: 30;
   height: 80px;
@@ -10,6 +10,14 @@
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+/* Past the hero the glass sits over light sections, so drop onto the
+   design's dark surface to keep the white nav legible. */
+.headerScrolled {
+  background: rgba(26, 26, 26, 0.92);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .inner {
@@ -136,14 +144,24 @@
 
 /* ===== Mobile (430 design) ===== */
 @media (max-width: 767px) {
-  .header {
+  .header,
+  .headerScrolled {
     position: sticky;
-    inset: auto;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: auto;
     height: 64px;
     padding: 5.375px 16px;
+    /* Already a solid light bar with the dark logo, so it needs no scrolled state. */
     background: #ffffff;
     backdrop-filter: blur(2.688px);
     -webkit-backdrop-filter: blur(2.688px);
+    box-shadow: none;
+  }
+
+  .headerScrolled {
+    box-shadow: 0 1px 0 rgba(26, 26, 26, 0.08);
   }
 
   .inner {

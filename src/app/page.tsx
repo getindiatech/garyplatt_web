@@ -10,6 +10,7 @@ import WhyChooseUs from "@/components/WhyChooseUs/WhyChooseUs";
 import TradeShows from "@/components/TradeShows/TradeShows";
 import OurProcess from "@/components/OurProcess/OurProcess";
 import Footer from "@/components/Footer/Footer";
+import BackToTop from "@/components/BackToTop/BackToTop";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <OurProcess />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

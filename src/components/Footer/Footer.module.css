@@ -88,6 +88,9 @@
   position: relative;
   width: 249.301px;
   height: 338.406px;
+  /* Taller than the cell's content box by design; must not be shrunk, or the
+     absolutely-positioned ellipse drops out of it onto the socials row. */
+  flex-shrink: 0;
 }
 
 .chairImage {
