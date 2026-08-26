@@ -129,7 +129,7 @@ export default function Footer() {
             aria-hidden
             className="mx-4 mt-10 select-none whitespace-nowrap font-wordmark text-[8vw] font-bold leading-[1.37] tracking-[0.02em] text-white/38 opacity-9 md:text-[5.1vw] xl:mx-0 xl:ml-[120px] xl:mt-[50px]"
           >
-            GRAY PLAT SEATING
+            GARY PLATT SEATING
           </p>
 
           <div className="flex w-full flex-wrap items-center justify-between gap-4 px-4 text-copy leading-normal text-brand-400 max-xl:pt-4 xl:w-auto xl:max-w-[550px] xl:justify-center xl:gap-[15px] xl:whitespace-nowrap xl:px-0 xl:py-[30px]">
@@ -146,7 +146,7 @@ export default function Footer() {
               ))}
             </div>
             <span aria-hidden className="hidden h-6 w-px bg-brand-400/40 xl:block" />
-            <p>© 2026 Gray Platt Seating</p>
+            <p>© 2026 Gary Platt Seating</p>
           </div>
         </div>
       </div>
