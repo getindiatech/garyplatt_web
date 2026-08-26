@@ -21,7 +21,8 @@ export default function Hero() {
           width={1920}
           height={1104}
           sizes="100vw"
-          className="absolute left-0 top-[-5.86%] h-[106.19%] w-full max-w-none object-cover"
+          style={{ height: "106.19%" }}
+          className="absolute left-0 top-[-5.86%] w-full max-w-none object-cover"
           priority
         />
 
