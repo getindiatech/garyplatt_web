@@ -9,7 +9,7 @@ import { HERO_SOCIALS } from "@/content/navigation";
  */
 export default function Hero() {
   return (
-    <section className="relative flex flex-col overflow-visible bg-white md:block md:aspect-[1920/1040] md:overflow-hidden md:bg-hero-bg">
+    <section className="relative flex flex-col overflow-visible bg-white md:block md:h-[clamp(55rem,81.25vw,65rem)] md:overflow-hidden md:bg-hero-bg">
       {/* --- Photo --- */}
       <div className="relative order-3 mt-8 h-[clamp(15rem,64vw,17.375rem)] w-full md:absolute md:inset-0 md:mt-0 md:h-auto md:overflow-hidden">
         <Image
@@ -51,7 +51,7 @@ export default function Hero() {
       </p>
 
       {/* --- Copy --- */}
-      <div className="order-1 px-4 md:absolute md:inset-x-0 md:top-[15.43%] md:px-gutter md:pb-20 md:pt-32">
+      <div className="order-1 px-4 md:absolute md:inset-x-0 md:top-[15.43%] md:px-gutter md:pb-20 md:pt-24 xl:pt-32">
         <div className="flex flex-col gap-3.5 md:block md:max-w-[46.6vw]">
           <p className="text-eyebrow uppercase leading-normal tracking-[0.06em] text-muted md:tracking-[0.3em]">
             Est. 1985
@@ -71,12 +71,12 @@ export default function Hero() {
       <div className="order-2 mx-4 mt-10 flex items-center justify-between md:contents">
         <a
           href="#"
-          className="inline-flex h-11 items-center justify-center whitespace-nowrap border border-ink-strong bg-button-dark px-6 text-center text-sm font-medium leading-5 tracking-[0.35px] text-white transition-opacity hover:opacity-88 md:absolute md:right-[7.6%] md:top-[87.2%] md:h-[clamp(2.75rem,2.6vw,3.125rem)] md:px-[1.3vw]"
+          className="inline-flex h-11 items-center justify-center whitespace-nowrap border border-ink-strong bg-button-dark px-6 text-center text-sm font-medium leading-5 tracking-[0.35px] text-white transition-opacity hover:opacity-88 md:absolute md:bottom-[12.8%] md:right-[7.6%] md:h-[clamp(2.75rem,2.6vw,3.125rem)] md:px-[1.3vw]"
         >
           Customize Your Chair
         </a>
 
-        <div className="flex items-center gap-3.5 md:absolute md:left-[5.52%] md:top-[87.2%] md:gap-4">
+        <div className="flex items-center gap-3.5 md:absolute md:bottom-[12.8%] md:left-[5.52%] md:gap-4">
           {HERO_SOCIALS.map(({ label, icon, iconDark }) => (
             <a key={label} href="#" aria-label={label} className="transition-opacity hover:opacity-70">
               <Image src={iconDark} alt="" width={18} height={18} className="size-[18px] md:hidden" />

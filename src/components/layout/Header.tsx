@@ -51,7 +51,7 @@ export default function Header() {
         </a>
 
         {/* Centre pill menu */}
-        <nav className="absolute left-1/2 top-1/2 hidden h-[67px] -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-7 rounded-[40px] p-6 backdrop-blur-md lg:flex xl:gap-[46px] xl:px-[38px]">
+        <nav className="hidden h-[67px] items-center justify-center gap-6 rounded-[40px] p-6 backdrop-blur-md lg:flex xl:absolute xl:left-1/2 xl:top-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2 xl:gap-7 2xl:gap-[46px] 2xl:px-[38px]">
           {NAV_LINKS.map(({ label, href }) => (
             <a
               key={label}

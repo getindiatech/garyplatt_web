@@ -15,7 +15,7 @@ export default function FeaturedInstallation() {
           title="Featured Installation"
           className="max-md:items-center max-md:text-center"
           action={
-            <ArrowLink href="#" className="max-lg:hidden whitespace-nowrap">
+            <ArrowLink href="#" className="max-md:hidden whitespace-nowrap">
               View All Projects
             </ArrowLink>
           }
@@ -54,7 +54,7 @@ export default function FeaturedInstallation() {
 
         <ArrowLink
           href="#"
-          className="mx-auto mt-6 flex h-11 w-fit justify-center px-5 text-ink-strong lg:hidden"
+          className="mx-auto mt-6 flex h-11 w-fit justify-center px-5 text-ink-strong md:hidden"
         >
           View All Projects
         </ArrowLink>

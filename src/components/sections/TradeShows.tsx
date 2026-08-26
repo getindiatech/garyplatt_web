@@ -23,7 +23,7 @@ export default function TradeShows() {
           {TRADE_SHOWS.map(({ code, name, date, location, image, alt }) => (
             <article
               key={code}
-              className="relative aspect-[624/468.5] overflow-hidden border-[0.638px] border-[rgba(57,49,44,0.3)] bg-[rgba(23,17,14,0.4)] p-px shadow-[0_15.946px_31.891px_-7.654px_rgba(0,0,0,0.25)] md:border md:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]"
+              className="relative flex flex-col overflow-hidden border-[0.638px] border-[rgba(57,49,44,0.3)] bg-[rgba(23,17,14,0.4)] p-px pt-[23.5%] shadow-[0_15.946px_31.891px_-7.654px_rgba(0,0,0,0.25)] md:border md:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]"
             >
               <Image
                 src={image}
@@ -38,8 +38,7 @@ export default function TradeShows() {
                 className="absolute inset-0 bg-linear-to-t from-dark-warm via-dark-warm/60 to-dark-warm/20"
               />
 
-              {/* Panel sits at a constant 31.3% of the card height in the design. */}
-              <div className="absolute inset-x-0 top-[31.3%] p-4 md:p-8">
+              <div className="relative p-4 md:p-8">
                 <div className="relative overflow-hidden bg-[rgba(23,17,14,0.1)] p-[15.308px] md:min-h-64 md:p-6">
                   <span
                     aria-hidden

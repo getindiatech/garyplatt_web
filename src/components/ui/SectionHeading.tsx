@@ -24,7 +24,7 @@ export default function SectionHeading({
       className={cn(
         "flex flex-col",
         align === "center" ? "items-center text-center" : "items-start",
-        action && "lg:flex-row lg:items-end lg:justify-between lg:gap-8",
+        action && "md:flex-row md:items-end md:justify-between md:gap-6",
         className,
       )}
     >

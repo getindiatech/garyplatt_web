@@ -15,7 +15,7 @@ export default function FeaturedCollection() {
           title="Featured Collection"
           className="max-md:items-center max-md:text-center"
           action={
-            <ArrowLink href="#" className="max-lg:hidden whitespace-nowrap">
+            <ArrowLink href="#" className="max-md:hidden whitespace-nowrap">
               View All Products
             </ArrowLink>
           }
@@ -62,7 +62,7 @@ export default function FeaturedCollection() {
 
         <ArrowLink
           href="#"
-          className="mx-auto mt-5 flex h-11 w-fit justify-center px-5 text-ink-strong lg:hidden"
+          className="mx-auto mt-5 flex h-11 w-fit justify-center px-5 text-ink-strong md:hidden"
         >
           View All Products
         </ArrowLink>
