@@ -125,12 +125,14 @@ export default function Footer() {
 
         {/* ===== Bottom row ===== */}
         <div className="flex flex-col items-center gap-4 pb-6 xl:h-[222px] xl:flex-row xl:items-start xl:justify-between xl:gap-0 xl:pb-0">
-          <p
+          <Image
+            src="/images/wordmark-gary-platt-seating.svg"
+            alt=""
             aria-hidden
-            className="mx-4 mt-10 select-none whitespace-nowrap font-wordmark text-[8vw] font-bold leading-[1.37] tracking-[0.02em] text-white/38 opacity-9 md:text-[5.1vw] xl:mx-0 xl:ml-[120px] xl:mt-[50px]"
-          >
-            GARY PLATT SEATING
-          </p>
+            width={1039}
+            height={70}
+            className="mx-4 mt-10 w-[calc(100%-2rem)] self-start md:w-[54.1vw] xl:-ml-[15px] xl:mr-0 xl:mt-[50px]"
+          />
 
           <div className="flex w-full flex-wrap items-center justify-between gap-4 px-4 text-copy leading-normal text-brand-400 max-xl:pt-4 xl:w-auto xl:max-w-[550px] xl:justify-center xl:gap-[15px] xl:whitespace-nowrap xl:px-0 xl:py-[30px]">
             <div className="flex items-center gap-4 xl:contents">

@@ -36,8 +36,6 @@
   --font-body: var(--font-geist-sans), -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
-  /* Footer wordmark is "ATTACK Semi Bold" in Figma (paid); Outfit stands in. */
-  --font-wordmark: var(--font-outfit), var(--font-geist-sans), sans-serif;
 
   /* --- Fluid type scale ---
      Every step interpolates between its mobile and desktop size, so type
