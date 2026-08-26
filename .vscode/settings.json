@@ -1,0 +1,13 @@
+{
+  // Tailwind v4 directives (@theme, @apply, @utility ...) are not in VS Code's
+  // built-in CSS grammar, so its validator reports them as unknown at-rules.
+  // They compile fine — silence the false positives.
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+
+  // Let Tailwind IntelliSense drive completions in CSS files.
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}
