@@ -17,13 +17,13 @@ export default function Footer() {
           <div className="order-1 flex w-full flex-col items-center justify-center xl:order-2 xl:h-[389.594px] xl:w-auto xl:flex-1 xl:border xl:border-footer-line xl:p-20">
             {/* Taller than the cell's content box by design; must not shrink,
                 or the absolutely-placed ellipse drops onto the socials row. */}
-            <div className="relative h-[338.406px] w-[249.301px] shrink-0">
+            <div className="relative h-[367px] w-[249px] shrink-0">
               <Image
-                src="/images/footer-gold-chair.png"
-                alt="Luxury gold gaming chair"
-                width={206}
-                height={332}
-                className="absolute left-[21.65px] top-0 h-[332px] w-[206px] object-contain"
+                src="/images/footer-chair.png"
+                alt="Soraya Flex Stacker chair"
+                width={213}
+                height={352}
+                className="absolute left-[19px] top-0 h-[352px] w-[213px] object-contain"
               />
               <Image
                 src="/images/footer-chair-ellipse.svg"
@@ -31,7 +31,7 @@ export default function Footer() {
                 aria-hidden
                 width={249}
                 height={64}
-                className="absolute left-0 top-[274.133px] h-[64.273px] w-[249.301px]"
+                className="absolute left-0 top-[303px] h-[64px] w-[249px]"
               />
             </div>
           </div>
@@ -127,10 +127,9 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 pb-6 xl:h-[222px] xl:flex-row xl:items-start xl:justify-between xl:gap-0 xl:pb-0">
           <p
             aria-hidden
-            className="mx-4 mt-10 flex select-none justify-between gap-2 whitespace-nowrap font-wordmark text-[13vw] font-semibold leading-[1.28] tracking-[0.03em] text-white/38 opacity-80 md:justify-center md:text-[8.6vw] xl:mx-0 xl:ml-10 xl:mt-[30.7px] xl:h-40 xl:gap-[26.341px] xl:text-[125px]"
+            className="mx-4 mt-10 select-none whitespace-nowrap font-wordmark text-[8vw] font-bold leading-[1.37] tracking-[0.02em] text-white/38 opacity-9 md:text-[5.1vw] xl:mx-0 xl:ml-[120px] xl:mt-[50px]"
           >
-            <span className="opacity-9">GARY</span>
-            <span className="opacity-9">PLATT</span>
+            GRAY PLAT SEATING
           </p>
 
           <div className="flex w-full flex-wrap items-center justify-between gap-4 px-4 text-copy leading-normal text-brand-400 max-xl:pt-4 xl:w-auto xl:max-w-[550px] xl:justify-center xl:gap-[15px] xl:whitespace-nowrap xl:px-0 xl:py-[30px]">
@@ -147,7 +146,7 @@ export default function Footer() {
               ))}
             </div>
             <span aria-hidden className="hidden h-6 w-px bg-brand-400/40 xl:block" />
-            <p>© 2026 Gray Platte Seating</p>
+            <p>© 2026 Gray Platt Seating</p>
           </div>
         </div>
       </div>

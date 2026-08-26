@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-type Variant = "dark" | "light";
+type Variant = "solid" | "outline" | "dark" | "light";
 
 type ButtonProps = React.ComponentPropsWithoutRef<"a"> & {
   variant?: Variant;
@@ -10,16 +10,18 @@ type ButtonProps = React.ComponentPropsWithoutRef<"a"> & {
 };
 
 const VARIANTS: Record<Variant, string> = {
+  /** V2 primary: flat ink fill, 6px radius. */
+  solid: "rounded-md border-transparent bg-ink text-white",
+  /** V2 secondary: page-tinted fill with a hairline ink rule. */
+  outline:
+    "rounded-md border-ink bg-[#fbfaf9] text-ink shadow-[0_1px_2px_rgba(0,0,0,0.05)]",
+  /** Legacy gradient pair, still used by the footer. */
   dark: "border-ink-strong bg-button-dark text-white",
   light: "border-ink-strong bg-button-light text-ink",
 };
 
-/**
- * The design's single button treatment: a 1px rule over a subtle top-lit
- * gradient. Height and padding scale with the fluid body step.
- */
 export default function Button({
-  variant = "dark",
+  variant = "solid",
   icon,
   className,
   children,

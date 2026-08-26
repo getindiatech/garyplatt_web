@@ -1,11 +1,12 @@
-export type Service = { icon: string; title: string; body: string };
-export type Product = { title: string; image: string };
-export type Principle = {
+export type Experience = {
   title: string;
   body: string;
+  cta: string;
+  icon: string;
   image: string;
   alt: string;
 };
+export type Product = { title: string; image: string; alt: string };
 export type Testimonial = {
   quote: string;
   name: string;
@@ -14,67 +15,77 @@ export type Testimonial = {
 };
 export type Project = { title: string; meta: string; image: string };
 export type Reason = { icon: string; title: string; body: string };
-export type TradeShow = {
-  code: string;
-  name: string;
-  date: string;
-  location: string;
-  image: string;
-  alt: string;
-};
 export type ProcessStep = { number: string; title: string; body: string };
 
-export const SERVICES: Service[] = [
+/** Hero copy — V2 headline and the two-button action row. */
+export const HERO = {
+  eyebrow: "Est. 1985",
+  title: "Sit down and feel",
+  titleAccent: "the difference",
+  lead: "Where European craftsmanship meets contemporary design. We curate exceptional interiors that tell your unique story.",
+  primary: { label: "Explore Services", href: "#services" },
+  secondary: { label: "View Projects", href: "#projects" },
+};
+
+/** "Designed For Every Experience" — replaces the old Premium Services trio. */
+export const EXPERIENCES: Experience[] = [
   {
-    icon: "/images/icon-compass.svg",
-    title: "Interior Design",
-    body: "Bespoke design solutions tailored to your lifestyle, creating harmonious spaces that reflect your unique vision.",
+    title: "Gaming",
+    body: "Seating solutions built for casinos, sportsbooks, gaming lounges and more.",
+    cta: "Explore Gaming",
+    icon: "/images/icon-experience-gaming.svg",
+    image: "/images/experience-gaming.jpg",
+    alt: "Casino gaming floor lined with slot machines",
   },
   {
-    icon: "/images/icon-palette.svg",
-    title: "Furniture Curation",
-    body: "Access to exclusive collections and custom pieces sourced from master craftsmen across Europe.",
-  },
-  {
-    icon: "/images/icon-hammer.svg",
-    title: "Custom Manufacturing",
-    body: "Handcrafted furniture made to your exact specifications using premium materials and time-honored techniques.",
+    title: "Hospitality",
+    body: "Elevating comfort in hotels, restaurants, lounges, theatres and beyond.",
+    cta: "Explore Hospitality",
+    icon: "/images/icon-experience-hospitality.svg",
+    image: "/images/experience-hospitality.jpg",
+    alt: "Hotel ballroom set for a banquet",
   },
 ];
 
 export const PRODUCTS: Product[] = [
-  { title: "The Angela Series", image: "/images/product-angela.png" },
-  { title: "The Troya Series", image: "/images/product-troya.png" },
-  { title: "The Callista Series", image: "/images/product-callista.png" },
-  { title: "The Helena Series", image: "/images/product-helena.png" },
+  {
+    title: "Nyx Armchair",
+    image: "/images/product-nyx-armchair.png",
+    alt: "Nyx armchair in dark upholstery",
+  },
+  {
+    title: "SORAYA FLEX STACKER",
+    image: "/images/product-soraya-flex-stacker.png",
+    alt: "Soraya Flex Stacker chair in cream upholstery",
+  },
+  {
+    title: "Sedona Series",
+    image: "/images/product-sedona-series.jpg",
+    alt: "Sedona bar stool with epic swivel and footrest",
+  },
+  {
+    title: "SORAYA FLEX",
+    image: "/images/product-soraya-flex.jpg",
+    alt: "Soraya Flex chair, front view",
+  },
 ];
 
-export const PRINCIPLES: Principle[] = [
-  {
-    title: "Form",
-    body: "Beautifully engineered forms that combine timeless aesthetics with ergonomic excellence.",
-    image: "/images/principle-form.jpg",
-    alt: "Aniline hide lounge chair close-up",
-  },
-  {
-    title: "Fit",
-    body: "Designed for exceptional comfort, providing superior support during extended seating experiences.",
-    image: "/images/principle-fit.jpg",
-    alt: "Cast bronze tufted upholstery close-up",
-  },
-  {
-    title: "Function",
-    body: "Expertly handcrafted using premium materials with meticulous attention to every detail.",
-    image: "/images/principle-function.jpg",
-    alt: "Artisan hand-stitching a wool boucle seat",
-  },
-  {
-    title: "PERFORMANCE",
-    body: "Built for durability, reliability, and long-term performance in demanding gaming and hospitality ",
-    image: "/images/principle-performance.jpg",
-    alt: "Casino floor lined with gaming chairs under chandeliers",
-  },
-];
+/** "The Art of Craftsmanship" — replaces the old Four Principles grid. */
+export const CRAFT = {
+  eyebrow: "Uncompromising Quality",
+  title: "The Art of",
+  titleAccent: "Craftsmanship",
+  body: "Every piece we create is a testament to our unwavering commitment to quality, from the initial sketch to the final stitch.",
+  points: [
+    "Hand-selected materials from sustainable sources",
+    "Master craftsmen with decades of experience",
+    "Rigorous quality control at every stage",
+    "Lifetime warranty on all custom pieces",
+  ],
+  cta: "Start Customization",
+  image: "/images/craft-lounge.jpg",
+  alt: "Casino bar and lounge with blue accent lighting",
+};
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -102,24 +113,24 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const PROJECTS: Project[] = [
   {
-    title: "Manhattan Penthouse",
+    title: "Resorts World Las Vegas",
     meta: "Las Vegas · 2023",
-    image: "/images/project-manhattan.jpg",
+    image: "/images/project-resorts-world.jpg",
   },
   {
-    title: "The Hudson Loft",
+    title: "San Manuel Casino, CA",
     meta: "Las Vegas · 2023",
-    image: "/images/project-hudson.jpg",
+    image: "/images/project-san-manuel-1.jpg",
   },
   {
-    title: "Park Avenue Residence",
+    title: "San Manuel Casino, CA",
     meta: "Las Vegas · 2023",
-    image: "/images/project-park-avenue.jpg",
+    image: "/images/project-san-manuel-2.jpg",
   },
   {
-    title: "Tribeca Townhouse",
+    title: "Soaring Eagle Casino & Resort, MI",
     meta: "Las Vegas · 2023",
-    image: "/images/project-tribeca.jpg",
+    image: "/images/project-soaring-eagle.jpg",
   },
 ];
 
@@ -143,25 +154,6 @@ export const REASONS: Reason[] = [
     icon: "/images/icon-compass.svg",
     title: "Expert Consultation",
     body: "Personalized guidance from initial concept to final installation.",
-  },
-];
-
-export const TRADE_SHOWS: TradeShow[] = [
-  {
-    code: "IGA",
-    name: "Indian Gaming Association",
-    date: "March 30 – April 2, 2026",
-    location: "San Diego, CA",
-    image: "/images/event-san-diego.jpg",
-    alt: "San Diego Convention Center at golden hour",
-  },
-  {
-    code: "HD",
-    name: "HD Expo + Conference",
-    date: "May 5 – May 7, 2026",
-    location: "Mandalay Bay, Las Vegas",
-    image: "/images/event-mandalay-bay.jpg",
-    alt: "Mandalay Bay Resort in Las Vegas at dusk",
   },
 ];
 

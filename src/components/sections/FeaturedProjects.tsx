@@ -5,14 +5,14 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ArrowLink from "@/components/ui/ArrowLink";
 import { PROJECTS } from "@/content/home";
 
-export default function FeaturedInstallation() {
+export default function FeaturedProjects() {
   return (
     <Section className="bg-white" id="gallery">
       <Container>
         <SectionHeading
           align="start"
           eyebrow="Portfolio"
-          title="Featured Installation"
+          title="Featured Projects"
           className="max-md:items-center max-md:text-center"
           action={
             <ArrowLink href="#" className="max-md:hidden whitespace-nowrap">

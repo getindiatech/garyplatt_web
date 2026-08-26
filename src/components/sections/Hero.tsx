@@ -1,11 +1,14 @@
 import Image from "next/image";
+import Button from "@/components/ui/Button";
+import { HERO } from "@/content/home";
 import { HERO_SOCIALS } from "@/content/navigation";
 
 /**
- * Desktop reproduces the 1920x1040 frame via aspect-ratio, with every child
- * placed in percentages so the whole composition scales with the viewport
- * instead of being pinned to the design's pixel offsets.
- * Below md it unstacks into the 430 layout: copy, actions, then the photo.
+ * Desktop reproduces the 1920x1040 frame, with every child placed in
+ * percentages so the composition scales with the viewport rather than being
+ * pinned to the design's pixel offsets. Height is floored so the copy is never
+ * clipped at mid widths, where type clamps instead of scaling down.
+ * Below md it unstacks: copy, actions, then the photo.
  */
 export default function Hero() {
   return (
@@ -22,9 +25,9 @@ export default function Hero() {
           priority
         />
 
-        {/* Mobile-only framed detail, per the 430 design */}
+        {/* Mobile-only framed detail */}
         <div className="absolute left-[68.6%] top-[40.6%] w-[16.2%] md:hidden">
-          <div className="relative aspect-[288/384] overflow-hidden border-[2.688px] border-white p-[2.688px] shadow-[0_5.599px_11.198px_-2.688px_rgba(0,0,0,0.25)]">
+          <div className="relative aspect-[288/384] overflow-hidden rounded-sm border-[2.688px] border-white p-[2.688px] shadow-[0_5.599px_11.198px_-2.688px_rgba(0,0,0,0.25)]">
             <div className="relative size-full overflow-hidden">
               <Image
                 src="/images/hero-interior.png"
@@ -54,41 +57,78 @@ export default function Hero() {
       <div className="order-1 px-4 md:absolute md:inset-x-0 md:top-[15.43%] md:px-gutter md:pb-20 md:pt-24 xl:pt-32">
         <div className="flex flex-col gap-3.5 md:block md:max-w-[46.6vw]">
           <p className="text-eyebrow uppercase leading-normal tracking-[0.06em] text-muted md:tracking-[0.3em]">
-            Est. 1985
+            {HERO.eyebrow}
           </p>
-          <h1 className="max-w-80 pt-1 font-display text-hero font-medium leading-[0.95] tracking-tight text-black md:max-w-none md:pt-6 md:text-white">
-            Elevate Your
-            <span className="block text-muted-alt md:italic">Living Space</span>
+
+          <h1 className="pt-1 font-display text-hero font-medium leading-[0.95] tracking-tight text-black md:max-w-[38.33vw] md:pt-6 md:text-white">
+            {HERO.title}
+            <span className="block text-muted-alt md:italic">
+              {HERO.titleAccent}
+            </span>
           </h1>
-          <p className="max-w-[37.125rem] text-lead leading-normal text-muted md:pt-6 md:leading-[1.625]">
-            Where European craftsmanship meets contemporary design. We curate
-            exceptional interiors that tell your unique story.
+
+          <p className="max-w-[28rem] text-lead leading-normal text-muted md:pt-6 md:leading-[1.625]">
+            {HERO.lead}
           </p>
+
+          {/* Action row sits in the copy column in V2 */}
+          <div className="flex flex-wrap gap-4 pt-6 md:pt-10">
+            <Button
+              href={HERO.primary.href}
+              icon="/images/icon-arrow-right-light.svg"
+            >
+              {HERO.primary.label}
+            </Button>
+            <Button href={HERO.secondary.href} variant="outline">
+              {HERO.secondary.label}
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* --- Actions --- */}
-      <div className="order-2 mx-4 mt-10 flex items-center justify-between md:contents">
-        <a
-          href="#"
-          className="inline-flex h-11 items-center justify-center whitespace-nowrap border border-ink-strong bg-button-dark px-6 text-center text-sm font-medium leading-5 tracking-[0.35px] text-white transition-opacity hover:opacity-88 md:absolute md:bottom-[12.8%] md:right-[7.6%] md:h-[clamp(2.75rem,2.6vw,3.125rem)] md:px-[1.3vw]"
-        >
-          Customize Your Chair
-        </a>
+      {/* --- Mobile socials --- */}
+      <div className="order-2 mx-4 mt-6 flex items-center gap-3.5 md:hidden">
+        {HERO_SOCIALS.map(({ label, iconDark }) => (
+          <a
+            key={label}
+            href="#"
+            aria-label={label}
+            className="transition-opacity hover:opacity-70"
+          >
+            <Image
+              src={iconDark}
+              alt=""
+              width={18}
+              height={18}
+              className="size-[18px]"
+            />
+          </a>
+        ))}
+      </div>
 
-        <div className="flex items-center gap-3.5 md:absolute md:bottom-[12.8%] md:left-[5.52%] md:gap-4">
-          {HERO_SOCIALS.map(({ label, icon, iconDark }) => (
-            <a key={label} href="#" aria-label={label} className="transition-opacity hover:opacity-70">
-              <Image src={iconDark} alt="" width={18} height={18} className="size-[18px] md:hidden" />
-              <Image src={icon} alt="" width={20} height={20} className="hidden size-5 md:block" />
-            </a>
-          ))}
-        </div>
+      {/* --- Desktop socials --- */}
+      <div className="absolute bottom-[11.25%] left-[5.52%] hidden items-center gap-4 md:flex">
+        {HERO_SOCIALS.map(({ label, iconDark }) => (
+          <a
+            key={label}
+            href="#"
+            aria-label={label}
+            className="transition-opacity hover:opacity-70"
+          >
+            <Image
+              src={iconDark}
+              alt=""
+              width={20}
+              height={20}
+              className="size-5"
+            />
+          </a>
+        ))}
       </div>
 
       {/* --- Desktop framed detail --- */}
-      <div className="absolute right-[7.08%] top-[36.92%] hidden w-[15%] md:block">
-        <div className="relative aspect-[288/384] overflow-hidden border-[0.625vw] border-white p-[0.625vw] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+      <div className="absolute right-[4.17%] top-[12.12%] hidden w-[15%] md:block">
+        <div className="relative aspect-[288/384] overflow-hidden rounded-lg border-[0.625vw] border-white p-[0.625vw] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
           <div className="relative size-full overflow-hidden">
             <Image
               src="/images/hero-interior.png"

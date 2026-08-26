@@ -22,7 +22,7 @@ export default function FeaturedCollection() {
         />
 
         <div className="mt-8 grid grid-cols-2 gap-3 xl:mt-16 xl:grid-cols-4 xl:gap-6">
-          {PRODUCTS.map(({ title, image }) => (
+          {PRODUCTS.map(({ title, image, alt }) => (
             <article
               key={title}
               className="flex flex-col gap-[clamp(0.9rem,1.7vw,2rem)] border-[0.447px] border-card-border bg-white p-[clamp(0.56rem,1vw,1.25rem)] transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(3,7,18,0.18)] md:border"
@@ -30,7 +30,7 @@ export default function FeaturedCollection() {
               <div className="relative aspect-square w-full overflow-hidden">
                 <Image
                   src={image}
-                  alt={title}
+                  alt={alt}
                   width={392}
                   height={392}
                   sizes="(max-width: 1279px) 45vw, 23vw"
@@ -39,7 +39,7 @@ export default function FeaturedCollection() {
               </div>
 
               <div className="flex items-center justify-between gap-3">
-                <h3 className="whitespace-nowrap font-display text-[clamp(0.875rem,1.2vw+0.4rem,1.625rem)] font-medium leading-tight text-black">
+                <h3 className="min-w-0 font-display text-[clamp(0.875rem,1.2vw+0.4rem,1.625rem)] font-medium leading-tight text-black md:whitespace-nowrap">
                   {title}
                 </h3>
                 <a

@@ -20,8 +20,8 @@ export default function About() {
             {/* The 0.8 ratio is identical at every breakpoint in the design. */}
             <div className="relative aspect-[872/1090] overflow-hidden">
               <Image
-                src="/images/about-living-space.jpg"
-                alt="Luxury living space with a designer swivel chair"
+                src="/images/about-atlantis.jpg"
+                alt="Casino floor with bespoke Gary Platt seating"
                 width={872}
                 height={1090}
                 sizes="(max-width: 1023px) 100vw, 45vw"
