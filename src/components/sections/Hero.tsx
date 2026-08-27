@@ -16,7 +16,7 @@ export default function Hero() {
       {/* --- Photo --- */}
       <div className="relative order-3 mt-8 h-[clamp(15rem,64vw,17.375rem)] w-full md:absolute md:inset-0 md:mt-0 md:h-auto md:overflow-hidden">
         <Image
-          src="/images/hero-interior.png"
+          src="/images/hero-interior.jpg"
           alt="Luxury interior with a dark modular sofa and brass pendant lights"
           width={1920}
           height={1104}
@@ -31,7 +31,7 @@ export default function Hero() {
           <div className="relative aspect-[288/384] overflow-hidden rounded-sm border-[2.688px] border-white p-[2.688px] shadow-[0_5.599px_11.198px_-2.688px_rgba(0,0,0,0.25)]">
             <div className="relative size-full overflow-hidden">
               <Image
-                src="/images/hero-interior.png"
+                src="/images/hero-interior.jpg"
                 alt=""
                 width={301}
                 height={165}
@@ -132,7 +132,7 @@ export default function Hero() {
         <div className="relative aspect-[288/384] overflow-hidden rounded-lg border-[0.625vw] border-white p-[0.625vw] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
           <div className="relative size-full overflow-hidden">
             <Image
-              src="/images/hero-interior.png"
+              src="/images/hero-interior.jpg"
               alt=""
               width={1120}
               height={644}
