@@ -3,7 +3,6 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import PageHero from "@/components/ui/PageHero";
-import Button from "@/components/ui/Button";
 import CustomConfigurator from "@/components/sections/CustomConfigurator";
 import { ABOUT_INTRO, FUN_FACTS, WHY_GARY_PLATT } from "@/content/about";
 
