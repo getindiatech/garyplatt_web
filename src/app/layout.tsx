@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Playfair_Display } from "next/font/google";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import BackToTop from "@/components/layout/BackToTop";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,9 +18,11 @@ const playfairDisplay = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-
 export const metadata: Metadata = {
-  title: "Gary Platt Seating — Luxury Casino & Hospitality Seating",
+  title: {
+    default: "Gary Platt Seating — Luxury Casino & Hospitality Seating",
+    template: "%s — Gary Platt Seating",
+  },
   description:
     "Premium gaming and hospitality seating designed with unmatched craftsmanship, innovative engineering, and timeless comfort.",
 };
@@ -28,7 +33,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${playfairDisplay.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <BackToTop />
+      </body>
     </html>
   );
 }
