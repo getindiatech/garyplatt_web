@@ -112,7 +112,7 @@ export default function GalleryPage() {
         <h3 className="pt-12 font-display text-[clamp(1.5rem,1.2vw+1.1rem,1.875rem)] font-medium leading-tight text-ink">
           Featured Installations
         </h3>
-        <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {FEATURED_INSTALLATIONS.map((item) => (
             <InstallationCard key={item.name} item={item} ratio="402 / 250" withLink />
           ))}
@@ -122,7 +122,7 @@ export default function GalleryPage() {
         <h3 className="pt-14 font-display text-[clamp(1.5rem,1.2vw+1.1rem,1.875rem)] font-medium leading-tight text-ink">
           All Installations
         </h3>
-        <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {ALL_INSTALLATIONS.map((item) => (
             <InstallationCard key={item.image} item={item} ratio="402 / 480" />
           ))}

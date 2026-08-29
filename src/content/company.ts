@@ -53,14 +53,21 @@ export const TRADE_SHOWS: TradeShow[] = [
 export const PROJECT_OVERVIEW = {
   name: "Bellagio Casino",
   location: "Las Vegas, USA",
-  gallery: [
-    { src: "/images/gallery-06.jpg", span: "lg:col-span-2 lg:row-span-2" },
-    { src: "/images/gallery-02.jpg", span: "" },
-    { src: "/images/gallery-03.jpg", span: "" },
-    { src: "/images/gallery-05.jpg", span: "" },
-    { src: "/images/gallery-04.jpg", span: "lg:col-span-2 lg:row-span-2" },
-    { src: "/images/gallery-07.jpg", span: "" },
-  ],
+  /**
+   * Mosaic from the design (1680 wide, 20px gaps):
+   *   block A  1166x608  +  two stacked 494x294
+   *   block B  two stacked 679x294  +  981x608
+   */
+  gallery: {
+    blockA: {
+      large: "/images/gallery-06.jpg",
+      stack: ["/images/gallery-02.jpg", "/images/gallery-03.jpg"],
+    },
+    blockB: {
+      stack: ["/images/gallery-05.jpg", "/images/gallery-07.jpg"],
+      large: "/images/gallery-04.jpg",
+    },
+  },
   sections: [
     {
       title: "Bellagio Casino Overview",
