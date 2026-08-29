@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import IconCircle from "@/components/ui/IconCircle";
 import {
@@ -63,10 +64,14 @@ export default function Footer() {
                     {heading}
                   </p>
                   <nav className="flex flex-col gap-4 text-copy leading-normal text-brand-300 md:gap-[18px]">
-                    {links.map((label) => (
-                      <a key={label} href="#" className="transition-colors hover:text-white">
+                    {links.map(({ label, href }) => (
+                      <Link
+                        key={label}
+                        href={href}
+                        className="transition-colors hover:text-white"
+                      >
                         {label}
-                      </a>
+                      </Link>
                     ))}
                   </nav>
                 </div>

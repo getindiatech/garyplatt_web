@@ -1,12 +1,12 @@
 export type NavLink = { label: string; href: string };
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "Products", href: "#products" },
-  { label: "About Us", href: "#about" },
-  { label: "Resources", href: "#resources" },
-  { label: "Sustainability", href: "#sustainability" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Products", href: "/products" },
+  { label: "About Us", href: "/about" },
+  { label: "Resources", href: "/resources/upholstery" },
+  { label: "Sustainability", href: "/sustainability" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 /** Hero strip: light glyphs sit on the dark photo, dark ones on the white mobile layout. */
@@ -39,16 +39,22 @@ export const FOOTER_COLUMNS = [
   {
     heading: "Products",
     links: [
-      "Gaming Seating",
-      "Hospitality Seating",
-      "Sustainability",
-      "Projects",
-      "Gallery",
+      { label: "Gaming Seating", href: "/products" },
+      { label: "Hospitality Seating", href: "/products" },
+      { label: "Sustainability", href: "/sustainability" },
+      { label: "Projects", href: "/gallery" },
+      { label: "Gallery", href: "/gallery" },
     ],
   },
   {
     heading: "Company",
-    links: ["About us", "Our Story", "News & Events", "Careers", "Contact Us"],
+    links: [
+      { label: "About us", href: "/about" },
+      { label: "Our Story", href: "/about" },
+      { label: "News & Events", href: "/events" },
+      { label: "Careers", href: "/contact" },
+      { label: "Contact Us", href: "/contact" },
+    ],
   },
 ] as const;
 

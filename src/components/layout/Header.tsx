@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { NAV_LINKS } from "@/content/navigation";
@@ -39,7 +40,7 @@ export default function Header() {
       )}
     >
       <div className="relative flex h-full w-full max-w-page items-center justify-between md:h-20 md:px-gutter">
-        <a href="#" className="block shrink-0" aria-label="Gary Platt Seating">
+        <Link href="/" className="block shrink-0" aria-label="Gary Platt Seating">
           <Image
             src="/images/logo-dark.svg"
             alt="Gary Platt Seating"
@@ -56,18 +57,18 @@ export default function Header() {
             className={cn("hidden h-[41.575px] w-[132.2px]", !light && "md:block")}
             priority
           />
-        </a>
+        </Link>
 
         {/* Centre pill menu */}
         <nav className={cn("hidden h-[67px] items-center justify-center gap-6 rounded-[40px] p-6 lg:flex xl:absolute xl:left-1/2 xl:top-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2 xl:gap-7 2xl:gap-[46px] 2xl:px-[38px]", light ? "bg-white" : "backdrop-blur-md")}>
           {NAV_LINKS.map(({ label, href }) => (
-            <a
+            <Link
               key={label}
               href={href}
               className={cn("whitespace-nowrap text-center text-[15px] font-medium leading-6 transition-opacity hover:opacity-70 xl:text-base", light ? "text-muted-alt hover:text-ink" : "text-white")}
             >
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -76,7 +77,7 @@ export default function Header() {
             <Image src="/images/icon-search.svg" alt="" width={20} height={20} className={cn("size-5", light && "invert")} />
           </button>
           <a
-            href="#contact"
+            href="/contact"
             className={cn("inline-flex h-14 items-center justify-center whitespace-nowrap rounded-full border px-6 text-base font-medium leading-6 transition-colors", light ? "border-ink-strong text-ink-strong hover:bg-ink-strong hover:text-white" : "border-[#f5f5f5] text-[#f5f5f5] hover:bg-[#f5f5f5] hover:text-ink")}
           >
             Request a Quote
@@ -96,12 +97,17 @@ export default function Header() {
         {open ? (
           <nav className="absolute inset-x-0 top-16 flex flex-col gap-1 border-t border-ink/8 bg-white p-4 shadow-[0_12px_24px_-12px_rgba(3,7,18,0.12)] md:top-20 lg:hidden">
             {NAV_LINKS.map(({ label, href }) => (
-              <a key={label} href={href} className="py-3 text-base font-medium leading-6 text-ink">
+              <Link
+                key={label}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="py-3 text-base font-medium leading-6 text-ink"
+              >
                 {label}
-              </a>
+              </Link>
             ))}
             <a
-              href="#contact"
+              href="/contact"
               className="mt-2 inline-flex h-11 items-center justify-center border border-ink-strong bg-button-dark px-6 text-center text-sm font-medium leading-5 tracking-[0.35px] text-white"
             >
               Request a Quote
