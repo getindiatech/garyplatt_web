@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
+import { cn } from "@/lib/cn";
 import Button from "@/components/ui/Button";
 import { Input, Select } from "@/components/ui/Field";
 import CustomConfigurator from "@/components/sections/CustomConfigurator";
@@ -23,14 +23,20 @@ function InstallationCard({
   withLink,
 }: {
   item: Installation;
+  /** Design ratio, applied from sm up; phones get a taller card for the caption. */
   ratio: string;
   withLink?: boolean;
 }) {
   return (
     <a
       href="#"
-      className="group relative block overflow-hidden"
-      style={{ aspectRatio: ratio }}
+      className={cn(
+        "group relative block aspect-(--card-ratio) overflow-hidden",
+        // Featured tiles are wide and short; on phones that leaves no room for
+        // the caption, so give them a taller box below sm.
+        withLink && "max-sm:aspect-[402/300]",
+      )}
+      style={{ "--card-ratio": ratio } as React.CSSProperties}
     >
       <Image
         src={item.image}
@@ -45,18 +51,18 @@ function InstallationCard({
         className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 to-transparent"
       />
 
-      <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-        <span>
-          <span className="block font-display text-[clamp(1rem,0.6vw+0.85rem,1.25rem)] font-medium leading-tight text-white">
+      <span className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-3 sm:flex-row sm:items-end sm:justify-between sm:gap-3 sm:p-5">
+        <span className="min-w-0">
+          <span className="block truncate font-display text-[clamp(0.875rem,0.6vw+0.75rem,1.25rem)] font-medium leading-tight text-white">
             {item.name}
           </span>
-          <span className="block pt-1 text-copy leading-normal text-white/80">
+          <span className="block truncate pt-0.5 text-meta leading-normal text-white/80 sm:pt-1">
             {item.location}
           </span>
         </span>
 
         {withLink ? (
-          <span className="shrink-0 whitespace-nowrap text-copy font-medium text-white underline-offset-4 group-hover:underline">
+          <span className="hidden shrink-0 whitespace-nowrap text-copy font-medium text-white underline-offset-4 group-hover:underline sm:block">
             View Project
           </span>
         ) : null}
@@ -77,7 +83,8 @@ export default function GalleryPage() {
         ]}
       />
 
-      <Container className="pb-section">
+      <div className="px-gutter pb-section">
+        <div className="mx-auto max-w-[1680px]">
         <div className="mx-auto max-w-[1180px] text-center">
           <h2 className="font-display text-[clamp(2rem,2.2vw+1.2rem,3.125rem)] font-medium leading-tight text-ink">
             {GALLERY_INTRO.title}
@@ -126,7 +133,8 @@ export default function GalleryPage() {
             Load More
           </Button>
         </div>
-      </Container>
+        </div>
+      </div>
 
       <CustomConfigurator />
     </>
