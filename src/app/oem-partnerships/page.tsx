@@ -43,7 +43,7 @@ export default function OemPartnershipsPage() {
         </div>
 
         {/* Why OEMs choose us */}
-        <div className="mt-16 grid grid-cols-1 items-center gap-10 lg:grid-cols-[794fr_1fr] lg:gap-16">
+        <div className="mt-16 grid grid-cols-1 items-center gap-10 lg:grid-cols-[794fr_966fr] lg:gap-16">
           <div className="relative aspect-[794/480] w-full overflow-hidden">
             <Image
               src={OEM_WHY.image}

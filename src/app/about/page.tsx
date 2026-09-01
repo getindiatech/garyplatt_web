@@ -20,7 +20,7 @@ export default function AboutPage() {
 
       {/* ===== Intro ===== */}
       <Container className="pb-section">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_774fr] lg:gap-10">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1010fr_774fr] lg:gap-10">
           <div>
             <p className="text-[clamp(1rem,0.4vw+0.9rem,1.125rem)] font-semibold leading-normal text-ink">
               {ABOUT_INTRO.eyebrow}

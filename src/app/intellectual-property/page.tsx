@@ -26,7 +26,7 @@ export default function IntellectualPropertyPage() {
         </div>
 
         {/* ===== Patent register ===== */}
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_560fr] lg:gap-16">
+        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-[1056fr_560fr] lg:gap-16">
           <div>
             <p className="text-[clamp(1rem,0.7vw+0.85rem,1.5rem)] font-medium leading-normal text-muted-alt">
               {IP_TABLE.eyebrow}

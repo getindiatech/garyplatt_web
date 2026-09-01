@@ -27,7 +27,7 @@ export default function SeatConfigurator() {
   const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_828fr] lg:gap-10">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[577fr_828fr] lg:gap-10">
       {/* ===== Preview ===== */}
       <div className="flex flex-col items-center gap-6">
         <div className="relative aspect-[577/585] w-full max-w-[577px]">

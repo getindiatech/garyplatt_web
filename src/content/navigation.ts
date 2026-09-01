@@ -52,7 +52,7 @@ export const FOOTER_COLUMNS = [
       { label: "About us", href: "/about" },
       { label: "Our Story", href: "/about" },
       { label: "News & Events", href: "/events" },
-      { label: "Careers", href: "/contact" },
+      { label: "Careers", href: "/careers" },
       { label: "Contact Us", href: "/contact" },
     ],
   },
