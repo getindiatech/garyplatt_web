@@ -16,13 +16,9 @@ export const CASINO_PRODUCTS: CasinoProduct[] = [
   { name: "Kopa Chair", image: "/images/casino-kopa-chair.png" },
 ];
 
-/**
- * Three filter tabs. The design supplies only the pill geometry — the labels
- * live inside component instances, so these names are provisional.
- * Each tab re-orders the same catalogue rather than holding its own set.
- */
+/** Each tab re-orders the same catalogue rather than holding its own set. */
 export const CASINO_TABS = [
-  { label: "All Seating", order: null },
-  { label: "Slot Seating", order: [4, 5, 6, 7, 0, 1, 2, 3, 8, 9, 10, 11] },
-  { label: "Table Games", order: [8, 9, 10, 11, 4, 5, 6, 7, 0, 1, 2, 3] },
+  { label: "Standard", order: null },
+  { label: "Premium", order: [4, 5, 6, 7, 0, 1, 2, 3, 8, 9, 10, 11] },
+  { label: "Luxury", order: [8, 9, 10, 11, 4, 5, 6, 7, 0, 1, 2, 3] },
 ] as const;
