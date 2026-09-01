@@ -84,7 +84,7 @@ export default function CareersPage() {
 
           {/* Listings */}
           <ul className="flex flex-col divide-y divide-hairline-soft border-y border-hairline-soft">
-            {OPEN_POSITIONS.jobs.map(({ title, body, type, location, deadline }) => (
+            {OPEN_POSITIONS.jobs.map(({ slug, title, body, type, location, deadline }) => (
               <li
                 key={title}
                 className="flex flex-col gap-5 py-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
@@ -111,7 +111,7 @@ export default function CareersPage() {
                   {deadline ? (
                     <p className="text-copy leading-normal text-muted">{deadline}</p>
                   ) : null}
-                  <Button href="/contact" variant="outline" className="h-11 text-sm">
+                  <Button href={`/careers/${slug}`} variant="outline" className="h-11 text-sm">
                     View Details
                   </Button>
                 </div>

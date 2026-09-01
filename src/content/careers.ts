@@ -1,5 +1,6 @@
 export type Value = { icon: string; title: string; body: string };
 export type Job = {
+  slug: string;
   title: string;
   body: string;
   type: string;
@@ -51,6 +52,7 @@ export const OPEN_POSITIONS = {
   categoriesTitle: "Job Categories",
   jobs: [
     {
+      slug: "senior-mechanical-engineer",
       title: "Senior Mechanical Engineer",
       body: "Design and validate seat frame and recline mechanisms that meet Gary Platt's safety and comfort standards.",
       type: "Full-time",
@@ -58,12 +60,14 @@ export const OPEN_POSITIONS = {
       deadline: "Deadline: 14 Jan 2025",
     },
     {
+      slug: "master-upholsterer",
       title: "Master Upholsterer",
       body: "Hand-finish premium seating in leather and fabric, upholding the stitching standards Gary Platt is known for.",
       type: "Full-time",
       location: "Munich / Remote",
     },
     {
+      slug: "materials-scientist",
       title: "Materials Scientist",
       body: "Research and qualify foams, fabrics, and leathers that balance durability, sustainability, and feel.",
       type: "Full-time",
