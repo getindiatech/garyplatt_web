@@ -42,3 +42,6 @@ next-env.d.ts
 
 # figma credentials (never commit)
 .figma-token
+
+# figma paste scratch (never commit)
+demo.css
