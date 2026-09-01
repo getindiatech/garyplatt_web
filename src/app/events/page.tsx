@@ -93,7 +93,7 @@ export default function EventsPage() {
                     </div>
 
                     <a
-                      href="#"
+                      href={`/events/${event.code.toLowerCase()}`}
                       className="inline-flex h-8 shrink-0 items-center justify-center gap-[5px] whitespace-nowrap border-[0.638px] border-ink-strong bg-button-dark pl-3 pr-2 text-[clamp(0.75rem,0.4vw+0.65rem,1rem)] font-medium text-[#f5f5f5] transition-opacity hover:opacity-88 md:h-14 md:gap-2 md:border md:px-6"
                     >
                       View Details
