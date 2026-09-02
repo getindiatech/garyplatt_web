@@ -4,6 +4,7 @@ import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import { USER_GUIDE } from "@/content/resources";
+import { DOCUMENT_REQUEST_HREF } from "@/content/navigation";
 
 export const metadata: Metadata = {
   title: "User Guides",
@@ -27,7 +28,7 @@ export default function UserGuidesPage() {
           <h2 className="font-display text-[clamp(2rem,2.2vw+1.2rem,3.125rem)] font-medium leading-tight text-ink">
             {USER_GUIDE.title}
           </h2>
-          <Button href="#" variant="outline" className="h-11 text-sm">
+          <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="h-11 text-sm">
             {USER_GUIDE.download}
           </Button>
         </div>
@@ -75,7 +76,7 @@ export default function UserGuidesPage() {
           ))}
         </ol>
 
-        <Button href="#" variant="outline" className="mt-8 h-11 text-sm">
+        <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="mt-8 h-11 text-sm">
           {USER_GUIDE.download}
         </Button>
       </Container>

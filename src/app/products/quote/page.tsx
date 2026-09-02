@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import ArrowLink from "@/components/ui/ArrowLink";
@@ -112,8 +113,8 @@ export default function SendQuotePage() {
                 <h3 className="min-w-0 font-display text-[clamp(0.875rem,1.2vw+0.4rem,1.625rem)] font-medium leading-tight text-black md:whitespace-nowrap">
                   {name}
                 </h3>
-                <a
-                  href="#"
+                <Link
+                  href="/products/casino"
                   aria-label={name}
                   className="inline-flex size-[clamp(1.34rem,2.5vw,3rem)] shrink-0 items-center justify-center rounded-full border-[0.447px] border-ink-strong bg-button-dark transition-opacity hover:opacity-85 md:border"
                 >
@@ -124,7 +125,7 @@ export default function SendQuotePage() {
                     height={20}
                     className="size-[clamp(0.56rem,1vw,1.25rem)]"
                   />
-                </a>
+                </Link>
               </div>
             </article>
           ))}

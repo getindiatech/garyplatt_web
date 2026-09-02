@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { HERO } from "@/content/home";
-import { HERO_SOCIALS } from "@/content/navigation";
+import { HERO_SOCIALS, SOCIAL_URLS } from "@/content/navigation";
 
 /**
  * Desktop reproduces the 1920x1040 frame, with every child placed in
@@ -92,7 +92,9 @@ export default function Hero() {
         {HERO_SOCIALS.map(({ label, iconDark }) => (
           <a
             key={label}
-            href="#"
+            href={SOCIAL_URLS[label]}
+            target="_blank"
+            rel="noreferrer"
             aria-label={label}
             className="transition-opacity hover:opacity-70"
           >
@@ -112,7 +114,9 @@ export default function Hero() {
         {HERO_SOCIALS.map(({ label, iconDark }) => (
           <a
             key={label}
-            href="#"
+            href={SOCIAL_URLS[label]}
+            target="_blank"
+            rel="noreferrer"
             aria-label={label}
             className="transition-opacity hover:opacity-70"
           >

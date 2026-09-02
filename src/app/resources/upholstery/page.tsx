@@ -4,6 +4,7 @@ import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import { FABRIC_BRANDS } from "@/content/resources";
+import { DOCUMENT_REQUEST_HREF } from "@/content/navigation";
 
 export const metadata: Metadata = {
   title: "Upholstery",
@@ -39,7 +40,7 @@ export default function UpholsteryPage() {
               </h2>
               <p className="pt-2 text-copy leading-relaxed text-muted">{body}</p>
 
-              <Button href="#" variant="outline" className="mt-5 h-11 text-sm">
+              <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="mt-5 h-11 text-sm">
                 View Collection
               </Button>
             </article>

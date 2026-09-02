@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -15,7 +16,7 @@ export default function FeaturedCollection() {
           title="Featured Collection"
           className="max-md:items-center max-md:text-center"
           action={
-            <ArrowLink href="#" className="max-md:hidden whitespace-nowrap">
+            <ArrowLink href="/products" className="max-md:hidden whitespace-nowrap">
               View All Products
             </ArrowLink>
           }
@@ -42,8 +43,8 @@ export default function FeaturedCollection() {
                 <h3 className="min-w-0 font-display text-[clamp(0.875rem,1.2vw+0.4rem,1.625rem)] font-medium leading-tight text-black md:whitespace-nowrap">
                   {title}
                 </h3>
-                <a
-                  href="#"
+                <Link
+                  href="/products/casino"
                   aria-label={title}
                   className="inline-flex size-[clamp(1.34rem,2.5vw,3rem)] shrink-0 items-center justify-center rounded-full border-[0.447px] border-ink-strong bg-button-dark transition-opacity hover:opacity-85 md:border"
                 >
@@ -54,14 +55,14 @@ export default function FeaturedCollection() {
                     height={20}
                     className="size-[clamp(0.56rem,1vw,1.25rem)]"
                   />
-                </a>
+                </Link>
               </div>
             </article>
           ))}
         </div>
 
         <ArrowLink
-          href="#"
+          href="/products"
           className="mx-auto mt-5 flex h-11 w-fit justify-center px-5 text-ink-strong md:hidden"
         >
           View All Products

@@ -151,7 +151,7 @@ export default function ContactPage() {
 
               <div className="sm:col-span-2">
                 <Button
-                  href="#"
+                  type="submit"
                   className="w-full justify-center sm:w-auto sm:px-16"
                 >
                   {CONTACT_FORM.submit}
@@ -223,7 +223,7 @@ export default function ContactPage() {
               {REP_LOCATIONS.note}
             </p>
 
-            <Button href="#" className="mt-6">
+            <Button href="/representatives" className="mt-6">
               {REP_LOCATIONS.cta}
             </Button>
           </div>

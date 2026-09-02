@@ -61,14 +61,35 @@ export default function Header() {
 
         {/* Centre pill menu */}
         <nav className={cn("hidden h-[67px] items-center justify-center gap-6 rounded-[40px] p-6 lg:flex xl:absolute xl:left-1/2 xl:top-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2 xl:gap-7 2xl:gap-[46px] 2xl:px-[38px]", light ? "bg-white" : "backdrop-blur-md")}>
-          {NAV_LINKS.map(({ label, href }) => (
-            <Link
-              key={label}
-              href={href}
-              className={cn("whitespace-nowrap text-center text-[15px] font-medium leading-6 transition-opacity hover:opacity-70 xl:text-base", light ? "text-muted-alt hover:text-ink" : "text-white")}
-            >
-              {label}
-            </Link>
+          {NAV_LINKS.map(({ label, href, children }) => (
+            <div key={label} className="group relative">
+              <Link
+                href={href}
+                className={cn(
+                  "whitespace-nowrap text-center text-[15px] font-medium leading-6 transition-opacity hover:opacity-70 xl:text-base",
+                  light ? "text-muted-alt hover:text-ink" : "text-white",
+                )}
+              >
+                {label}
+              </Link>
+
+              {children ? (
+                <div className="invisible absolute left-1/2 top-full z-10 -translate-x-1/2 pt-4 opacity-0 transition-[opacity,visibility] group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <ul className="min-w-56 rounded-lg border border-hairline-soft bg-white p-2 shadow-[0_18px_40px_-24px_rgba(3,7,18,0.35)]">
+                    {children.map((child) => (
+                      <li key={child.label}>
+                        <Link
+                          href={child.href}
+                          className="block whitespace-nowrap rounded px-3 py-2 text-[15px] leading-6 text-muted-alt transition-colors hover:bg-surface hover:text-ink"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
           ))}
         </nav>
 
@@ -76,12 +97,12 @@ export default function Header() {
           <button type="button" className="flex items-center justify-center p-2" aria-label="Search">
             <Image src="/images/icon-search.svg" alt="" width={20} height={20} className={cn("size-5", light && "invert")} />
           </button>
-          <a
+          <Link
             href="/contact"
             className={cn("inline-flex h-14 items-center justify-center whitespace-nowrap rounded-full border px-6 text-base font-medium leading-6 transition-colors", light ? "border-ink-strong text-ink-strong hover:bg-ink-strong hover:text-white" : "border-[#f5f5f5] text-[#f5f5f5] hover:bg-[#f5f5f5] hover:text-ink")}
           >
             Request a Quote
-          </a>
+          </Link>
         </div>
 
         <button
@@ -95,23 +116,38 @@ export default function Header() {
         </button>
 
         {open ? (
-          <nav className="absolute inset-x-0 top-16 flex flex-col gap-1 border-t border-ink/8 bg-white p-4 shadow-[0_12px_24px_-12px_rgba(3,7,18,0.12)] md:top-20 lg:hidden">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="py-3 text-base font-medium leading-6 text-ink"
-              >
-                {label}
-              </Link>
+          <nav className="absolute inset-x-0 top-16 flex max-h-[calc(100vh-4rem)] flex-col gap-1 overflow-y-auto border-t border-ink/8 bg-white p-4 shadow-[0_12px_24px_-12px_rgba(3,7,18,0.12)] md:top-20 lg:hidden">
+            {NAV_LINKS.map(({ label, href, children }) => (
+              <div key={label}>
+                <Link
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-base font-medium leading-6 text-ink"
+                >
+                  {label}
+                </Link>
+                {children ? (
+                  <div className="flex flex-col border-l border-hairline-soft pl-4">
+                    {children.map((child) => (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        onClick={() => setOpen(false)}
+                        className="py-2 text-[15px] leading-6 text-muted-alt"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             ))}
-            <a
+            <Link
               href="/contact"
               className="mt-2 inline-flex h-11 items-center justify-center border border-ink-strong bg-button-dark px-6 text-center text-sm font-medium leading-5 tracking-[0.35px] text-white"
             >
               Request a Quote
-            </a>
+            </Link>
           </nav>
         ) : null}
       </div>

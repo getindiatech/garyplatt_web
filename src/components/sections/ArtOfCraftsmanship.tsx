@@ -36,7 +36,7 @@ export default function ArtOfCraftsmanship() {
               ))}
             </ul>
 
-            <Button href="#" icon="/images/icon-arrow-right-light.svg">
+            <Button href="/products/quote" icon="/images/icon-arrow-right-light.svg">
               {CRAFT.cta}
             </Button>
           </div>

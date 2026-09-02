@@ -1,7 +1,9 @@
 import Image from "next/image";
+import SmartLink from "@/components/ui/SmartLink";
 import { cn } from "@/lib/cn";
 
 type ArrowLinkProps = React.ComponentPropsWithoutRef<"a"> & {
+  href: string;
   icon?: string;
 };
 
@@ -13,7 +15,7 @@ export default function ArrowLink({
   ...props
 }: ArrowLinkProps) {
   return (
-    <a
+    <SmartLink
       className={cn(
         "group inline-flex items-center gap-2 text-body font-medium text-ink",
         "transition-opacity hover:opacity-70",
@@ -29,6 +31,6 @@ export default function ArrowLink({
         height={16}
         className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5"
       />
-    </a>
+    </SmartLink>
   );
 }

@@ -82,7 +82,7 @@ export default function About() {
             </div>
 
             <Button
-              href="#"
+              href="/about"
               icon="/images/icon-arrow-right-light.svg"
               className="mt-10 hidden rounded gap-1 px-6 py-3.5 md:inline-flex"
             >

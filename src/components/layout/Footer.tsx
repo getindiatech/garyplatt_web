@@ -6,6 +6,7 @@ import {
   FOOTER_COLUMNS,
   FOOTER_SOCIALS,
   LEGAL_LINKS,
+  SOCIAL_URLS,
 } from "@/content/navigation";
 
 export default function Footer() {
@@ -47,7 +48,7 @@ export default function Footer() {
               comfort.
             </p>
             <Button
-              href="#"
+              href="/products"
               variant="light"
               icon="/images/icon-arrow-up-right-dark.svg"
               className="mt-6 h-11 w-54 md:h-14 md:w-auto"
@@ -89,7 +90,14 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-2">
             {FOOTER_SOCIALS.map(({ name, icon }) => (
-              <a key={name} href="#" aria-label={name} className="group">
+              <a
+                key={name}
+                href={SOCIAL_URLS[name]}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={name}
+                className="group"
+              >
                 <IconCircle className="group-hover:bg-white/20">
                   <Image src={icon} alt="" width={20} height={20} className="size-5" />
                 </IconCircle>
@@ -110,7 +118,12 @@ export default function Footer() {
               className="flex h-20 min-w-0 flex-[212_0_0] items-center justify-center border-r border-footer-line px-5 py-6 data-[wide=true]:flex-[248_0_0]"
               data-wide={i >= 2}
             >
-              <a href="#" className="group flex items-center gap-5">
+              <a
+                href={SOCIAL_URLS[name]}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-5"
+              >
                 <span className="whitespace-nowrap text-copy font-medium text-brand-400 xl:text-base">
                   {name}
                 </span>
@@ -141,14 +154,14 @@ export default function Footer() {
 
           <div className="flex w-full flex-wrap items-center justify-between gap-4 px-4 text-copy leading-normal text-brand-400 max-xl:pt-4 xl:w-auto xl:max-w-[550px] xl:justify-center xl:gap-[15px] xl:whitespace-nowrap xl:px-0 xl:py-[30px]">
             <div className="flex items-center gap-4 xl:contents">
-              {LEGAL_LINKS.map((label, i) => (
+              {LEGAL_LINKS.map(({ label, href }, i) => (
                 <span key={label} className="contents">
                   {i > 0 ? (
                     <span aria-hidden className="hidden h-6 w-px bg-brand-400/40 xl:block" />
                   ) : null}
-                  <a href="#" className="transition-colors hover:text-white">
+                  <Link href={href} className="transition-colors hover:text-white">
                     {label}
-                  </a>
+                  </Link>
                 </span>
               ))}
             </div>

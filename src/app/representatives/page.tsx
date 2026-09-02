@@ -56,7 +56,7 @@ export default function RepresentativesPage() {
               <h3 className="pt-5 font-display text-[clamp(1.125rem,0.8vw+0.95rem,1.5rem)] font-semibold leading-tight text-ink">
                 {name}
               </h3>
-              <Button href="#" variant="outline" className="mt-4 h-11 w-fit text-sm">
+              <Button href="/contact" variant="outline" className="mt-4 h-11 w-fit text-sm">
                 View Details
               </Button>
             </article>

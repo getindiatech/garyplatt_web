@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -15,7 +16,7 @@ export default function FeaturedProjects() {
           title="Featured Projects"
           className="max-md:items-center max-md:text-center"
           action={
-            <ArrowLink href="#" className="max-md:hidden whitespace-nowrap">
+            <ArrowLink href="/gallery" className="max-md:hidden whitespace-nowrap">
               View All Projects
             </ArrowLink>
           }
@@ -23,9 +24,9 @@ export default function FeaturedProjects() {
 
         <div className="mt-8 grid grid-cols-2 gap-3 xl:mt-16 xl:gap-5 2xl:gap-8">
           {PROJECTS.map(({ title, meta, image }) => (
-            <a
+            <Link
               key={title}
-              href="#"
+              href="/gallery/project"
               className="group relative aspect-[193/144] overflow-hidden md:aspect-[896/672]"
             >
               <Image
@@ -48,12 +49,12 @@ export default function FeaturedProjects() {
                   {meta}
                 </span>
               </span>
-            </a>
+            </Link>
           ))}
         </div>
 
         <ArrowLink
-          href="#"
+          href="/gallery"
           className="mx-auto mt-6 flex h-11 w-fit justify-center px-5 text-ink-strong md:hidden"
         >
           View All Projects

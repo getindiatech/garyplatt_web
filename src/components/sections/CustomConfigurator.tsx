@@ -37,7 +37,7 @@ export default function CustomConfigurator() {
               {CONFIGURATOR.body}
             </p>
             <Button
-              href="#"
+              href="/products/quote"
               icon="/images/icon-arrow-right-light.svg"
               className="mt-6"
             >

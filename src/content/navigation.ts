@@ -1,13 +1,67 @@
-export type NavLink = { label: string; href: string };
+export type NavLink = { label: string; href: string; children?: NavLink[] };
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "Products", href: "/products" },
-  { label: "About Us", href: "/about" },
-  { label: "Resources", href: "/resources/upholstery" },
+  {
+    label: "Products",
+    href: "/products",
+    children: [
+      { label: "All Products", href: "/products" },
+      { label: "Casino Seating", href: "/products/casino" },
+      { label: "Customize Your Seat", href: "/products/quote" },
+    ],
+  },
+  {
+    label: "About Us",
+    href: "/about",
+    children: [
+      { label: "About Us", href: "/about" },
+      { label: "Representatives", href: "/representatives" },
+      { label: "News & Events", href: "/events" },
+      { label: "Career With Us", href: "/careers" },
+      { label: "OEM Partnerships", href: "/oem-partnerships" },
+      { label: "Intellectual Property", href: "/intellectual-property" },
+    ],
+  },
+  {
+    label: "Resources",
+    href: "/resources/upholstery",
+    children: [
+      { label: "Upholstery", href: "/resources/upholstery" },
+      { label: "Finishes", href: "/resources/finishes" },
+      { label: "Look Book", href: "/resources/look-book" },
+      { label: "User Guides", href: "/resources/user-guides" },
+      { label: "Warranty", href: "/resources/warranty" },
+    ],
+  },
   { label: "Sustainability", href: "/sustainability" },
-  { label: "Gallery", href: "/gallery" },
+  {
+    label: "Gallery",
+    href: "/gallery",
+    children: [
+      { label: "Gallery", href: "/gallery" },
+      { label: "Project Overview", href: "/gallery/project" },
+    ],
+  },
   { label: "Contact Us", href: "/contact" },
 ];
+
+/**
+ * Social profile URLs — the real handles are not in the design, so these point
+ * at the brand's own site until the client supplies them.
+ */
+export const SOCIAL_URLS: Record<string, string> = {
+  Instagram: "https://www.garyplatt.com",
+  Twitter: "https://www.garyplatt.com",
+  YouTube: "https://www.garyplatt.com",
+  Facebook: "https://www.garyplatt.com",
+  Linkedin: "https://www.garyplatt.com",
+};
+
+/**
+ * Where "Download PDF" / document buttons lead. No PDFs ship with the design,
+ * so they route to Contact where the documents can be requested.
+ */
+export const DOCUMENT_REQUEST_HREF = "/contact";
 
 /** Hero strip: light glyphs sit on the dark photo, dark ones on the white mobile layout. */
 export const HERO_SOCIALS = [
@@ -58,4 +112,7 @@ export const FOOTER_COLUMNS = [
   },
 ] as const;
 
-export const LEGAL_LINKS = ["Privacy Policy", "Disclaimer"] as const;
+export const LEGAL_LINKS = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Disclaimer", href: "/disclaimer" },
+] as const;

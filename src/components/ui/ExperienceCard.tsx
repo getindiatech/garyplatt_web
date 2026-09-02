@@ -5,7 +5,7 @@ export type ExperienceCardProps = {
   title: string;
   body: string;
   cta: string;
-  href?: string;
+  href: string;
   icon?: string;
   image: string;
   alt: string;
@@ -20,7 +20,7 @@ export default function ExperienceCard({
   title,
   body,
   cta,
-  href = "#",
+  href,
   icon,
   image,
   alt,

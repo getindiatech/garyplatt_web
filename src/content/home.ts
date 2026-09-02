@@ -2,6 +2,7 @@ export type Experience = {
   title: string;
   body: string;
   cta: string;
+  href: string;
   icon: string;
   image: string;
   alt: string;
@@ -33,6 +34,7 @@ export const EXPERIENCES: Experience[] = [
     title: "Gaming",
     body: "Seating solutions built for casinos, sportsbooks, gaming lounges and more.",
     cta: "Explore Gaming",
+    href: "/products/gaming",
     icon: "/images/icon-experience-gaming.svg",
     image: "/images/experience-gaming.jpg",
     alt: "Casino gaming floor lined with slot machines",
@@ -41,6 +43,7 @@ export const EXPERIENCES: Experience[] = [
     title: "Hospitality",
     body: "Elevating comfort in hotels, restaurants, lounges, theatres and beyond.",
     cta: "Explore Hospitality",
+    href: "/products/hospitality",
     icon: "/images/icon-experience-hospitality.svg",
     image: "/images/experience-hospitality.jpg",
     alt: "Hotel ballroom set for a banquet",

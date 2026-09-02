@@ -69,7 +69,7 @@ export default function OemPartnershipsPage() {
               <Button href="/contact" icon="/images/icon-arrow-right-light.svg">
                 {OEM_WHY.primary}
               </Button>
-              <Button href="#" variant="outline">
+              <Button href="/contact" variant="outline">
                 {OEM_WHY.secondary}
               </Button>
             </div>

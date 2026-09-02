@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { CASINO_PRODUCTS, CASINO_TABS } from "@/content/casino";
 
@@ -64,8 +65,8 @@ export default function CasinoCatalogue() {
                 <h2 className="min-w-0 truncate font-display text-[clamp(1.125rem,0.9vw+0.9rem,1.625rem)] font-medium leading-tight text-black">
                   {name}
                 </h2>
-                <a
-                  href="#"
+                <Link
+                  href="/products/quote"
                   aria-label={name}
                   className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-ink-strong bg-button-dark transition-opacity hover:opacity-85"
                 >
@@ -76,7 +77,7 @@ export default function CasinoCatalogue() {
                     height={20}
                     className="size-5"
                   />
-                </a>
+                </Link>
               </div>
             </article>
           ))}

@@ -1,13 +1,22 @@
 import Image from "next/image";
+import SmartLink from "@/components/ui/SmartLink";
 import { cn } from "@/lib/cn";
 
 type Variant = "solid" | "outline" | "dark" | "light";
 
-type ButtonProps = React.ComponentPropsWithoutRef<"a"> & {
+type Common = {
   variant?: Variant;
   /** Optional trailing icon path; sized to match the label. */
   icon?: string;
 };
+
+type AnchorProps = Common &
+  React.ComponentPropsWithoutRef<"a"> & { href: string };
+type NativeProps = Common &
+  React.ComponentPropsWithoutRef<"button"> & { href?: undefined };
+
+/** Renders an anchor when given an `href`, a real `<button>` otherwise. */
+type ButtonProps = AnchorProps | NativeProps;
 
 const VARIANTS: Record<Variant, string> = {
   /** V2 primary: flat ink fill, 6px radius. */
@@ -27,16 +36,15 @@ export default function Button({
   children,
   ...props
 }: ButtonProps) {
-  return (
-    <a
-      className={cn(
-        "inline-flex items-center justify-center gap-2 border px-6 py-3",
-        "text-body font-medium leading-6 transition-opacity hover:opacity-88",
-        VARIANTS[variant],
-        className,
-      )}
-      {...props}
-    >
+  const classes = cn(
+    "inline-flex items-center justify-center gap-2 border px-6 py-3",
+    "text-body font-medium leading-6 transition-opacity hover:opacity-88",
+    VARIANTS[variant],
+    className,
+  );
+
+  const inner = (
+    <>
       {children}
       {icon ? (
         <Image
@@ -47,6 +55,21 @@ export default function Button({
           className="size-4 shrink-0 md:size-5"
         />
       ) : null}
-    </a>
+    </>
+  );
+
+  if (props.href !== undefined) {
+    return (
+      <SmartLink className={classes} {...(props as AnchorProps)}>
+        {inner}
+      </SmartLink>
+    );
+  }
+
+  const { type = "button", ...rest } = props as NativeProps;
+  return (
+    <button type={type} className={classes} {...rest}>
+      {inner}
+    </button>
   );
 }

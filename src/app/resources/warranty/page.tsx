@@ -3,6 +3,7 @@ import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import { WARRANTY } from "@/content/resources";
+import { DOCUMENT_REQUEST_HREF } from "@/content/navigation";
 
 export const metadata: Metadata = {
   title: "Warranty",
@@ -43,13 +44,13 @@ export default function WarrantyPage() {
         </ul>
 
         <div className="flex flex-wrap items-center gap-6 pt-8">
-          <Button href="#" variant="outline" className="h-14">
+          <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="h-14">
             {WARRANTY.formLink}
           </Button>
           <span className="text-[clamp(1rem,0.5vw+0.85rem,1.25rem)] font-medium text-ink">
             {WARRANTY.divider}
           </span>
-          <Button href="#" variant="outline" className="h-14">
+          <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="h-14">
             {WARRANTY.download}
           </Button>
         </div>
@@ -64,7 +65,7 @@ export default function WarrantyPage() {
         <p className="whitespace-pre-line pt-3 text-copy leading-relaxed text-muted">
           {WARRANTY.inspection}
         </p>
-        <Button href="#" variant="outline" className="mt-6 h-11 text-sm">
+        <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="mt-6 h-11 text-sm">
           {WARRANTY.download}
         </Button>
 
@@ -97,7 +98,7 @@ export default function WarrantyPage() {
           </div>
         ))}
 
-        <Button href="#" variant="outline" className="mt-8 h-11 text-sm">
+        <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="mt-8 h-11 text-sm">
           {WARRANTY.download}
         </Button>
       </Container>

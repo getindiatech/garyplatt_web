@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Container from "./Container";
 import { cn } from "@/lib/cn";
 
@@ -44,9 +45,9 @@ export default function PageHero({ title, crumbs, className }: PageHeroProps) {
               />
             ) : null}
             {href ? (
-              <a href={href} className="transition-colors hover:text-ink">
+              <Link href={href} className="transition-colors hover:text-ink">
                 {label}
-              </a>
+              </Link>
             ) : (
               <span aria-current="page">{label}</span>
             )}

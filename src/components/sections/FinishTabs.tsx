@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 import Button from "@/components/ui/Button";
+import { DOCUMENT_REQUEST_HREF } from "@/content/navigation";
 import {
   FINISH_SWATCHES,
   FINISH_TABS,
@@ -107,7 +108,7 @@ export default function FinishTabs() {
       )}
 
       {tab === 1 ? (
-        <Button href="#" variant="outline" className="h-11 w-fit text-sm">
+        <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="h-11 w-fit text-sm">
           Download PDF
         </Button>
       ) : null}
