@@ -96,7 +96,7 @@ export default function Hero() {
             target="_blank"
             rel="noreferrer"
             aria-label={label}
-            className="transition-opacity hover:opacity-70"
+            className="-m-2 p-2 transition-opacity hover:opacity-70"
           >
             <Image
               src={iconDark}
@@ -118,7 +118,7 @@ export default function Hero() {
             target="_blank"
             rel="noreferrer"
             aria-label={label}
-            className="transition-opacity hover:opacity-70"
+            className="-m-2 p-2 transition-opacity hover:opacity-70"
           >
             <Image
               src={iconDark}

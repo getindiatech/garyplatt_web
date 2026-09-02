@@ -116,7 +116,7 @@ export default function SendQuotePage() {
                 <Link
                   href="/products/casino"
                   aria-label={name}
-                  className="inline-flex size-[clamp(1.34rem,2.5vw,3rem)] shrink-0 items-center justify-center rounded-full border-[0.447px] border-ink-strong bg-button-dark transition-opacity hover:opacity-85 md:border"
+                  className="relative inline-flex size-[clamp(1.34rem,2.5vw,3rem)] shrink-0 items-center justify-center rounded-full border-[0.447px] border-ink-strong bg-button-dark transition-opacity after:absolute after:-inset-1.5 after:content-[''] hover:opacity-85 md:border md:after:hidden"
                 >
                   <Image
                     src="/images/icon-arrow-up-right.svg"

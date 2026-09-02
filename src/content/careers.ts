@@ -1,6 +1,8 @@
 export type Value = { icon: string; title: string; body: string };
 export type Job = {
   slug: string;
+  /** One of JOB_CATEGORIES, minus "All" — drives the category filter. */
+  category: string;
   title: string;
   body: string;
   type: string;
@@ -53,6 +55,7 @@ export const OPEN_POSITIONS = {
   jobs: [
     {
       slug: "senior-mechanical-engineer",
+      category: "Engineering",
       title: "Senior Mechanical Engineer",
       body: "Design and validate seat frame and recline mechanisms that meet Gary Platt's safety and comfort standards.",
       type: "Full-time",
@@ -61,6 +64,7 @@ export const OPEN_POSITIONS = {
     },
     {
       slug: "master-upholsterer",
+      category: "Manufacturing & Production",
       title: "Master Upholsterer",
       body: "Hand-finish premium seating in leather and fabric, upholding the stitching standards Gary Platt is known for.",
       type: "Full-time",
@@ -68,6 +72,7 @@ export const OPEN_POSITIONS = {
     },
     {
       slug: "materials-scientist",
+      category: "Design & Innovation",
       title: "Materials Scientist",
       body: "Research and qualify foams, fabrics, and leathers that balance durability, sustainability, and feel.",
       type: "Full-time",

@@ -4,7 +4,8 @@ import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import { Field, Input, Select, Textarea } from "@/components/ui/Field";
-import { CONTACT_FORM, CONTACT_INFO, REP_LOCATIONS } from "@/content/contact";
+import RepLocator from "@/components/sections/RepLocator";
+import { CONTACT_FORM, CONTACT_INFO } from "@/content/contact";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -176,57 +177,7 @@ export default function ContactPage() {
             />
           </div>
 
-          <div>
-            <h2 className="font-display text-[clamp(1.75rem,1.5vw+1.2rem,2.5rem)] font-medium leading-tight text-ink">
-              {REP_LOCATIONS.title}
-            </h2>
-
-            <div className="flex gap-8 pt-6">
-              {REP_LOCATIONS.tabs.map((tab, i) => (
-                <button
-                  key={tab}
-                  type="button"
-                  className={
-                    i === 0
-                      ? "border-b-2 border-ink pb-2 text-copy font-medium text-ink"
-                      : "border-b-2 border-transparent pb-2 text-copy font-medium text-muted transition-colors hover:text-ink"
-                  }
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex flex-col gap-4 pt-6">
-              <Field label={REP_LOCATIONS.domesticLabel} htmlFor="state">
-                <Select id="state" name="state" defaultValue="">
-                  <option value="" disabled>
-                    {REP_LOCATIONS.domesticPlaceholder}
-                  </option>
-                </Select>
-              </Field>
-
-              <p className="text-copy leading-normal text-muted">
-                {REP_LOCATIONS.divider}
-              </p>
-
-              <Field label={REP_LOCATIONS.internationalLabel} htmlFor="country">
-                <Select id="country" name="country" defaultValue="">
-                  <option value="" disabled>
-                    {REP_LOCATIONS.internationalPlaceholder}
-                  </option>
-                </Select>
-              </Field>
-            </div>
-
-            <p className="pt-6 text-copy leading-relaxed text-muted">
-              {REP_LOCATIONS.note}
-            </p>
-
-            <Button href="/representatives" className="mt-6">
-              {REP_LOCATIONS.cta}
-            </Button>
-          </div>
+          <RepLocator />
         </div>
       </Container>
     </>

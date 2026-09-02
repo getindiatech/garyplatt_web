@@ -1,19 +1,28 @@
-export type Representative = { name: string; image: string };
+export type RepresentativeSegment = "Casino" | "Hospitality";
+export type Representative = {
+  name: string;
+  image: string;
+  segments: RepresentativeSegment[];
+};
 
 export const REPRESENTATIVES_INTRO =
   "Gary Platt is proud to partner with some of the   finest industry representatives in the world";
 
-export const REPRESENTATIVE_TABS = ["Casino", "Hospitality"];
+export const REPRESENTATIVE_TABS: RepresentativeSegment[] = ["Casino", "Hospitality"];
 
+/**
+ * The design does not say which representatives cover which segment, so the
+ * tabs filter on this list; several partners cover both.
+ */
 export const REPRESENTATIVES: Representative[] = [
-  { name: "Foo Shee Design", image: "/images/rep-01.jpg" },
-  { name: "Gitchi Gaming", image: "/images/rep-02.jpg" },
-  { name: "Phat Sourching", image: "/images/rep-03.jpg" },
-  { name: "Ken Deemer", image: "/images/rep-04.jpg" },
-  { name: "Sean Smith", image: "/images/rep-05.jpg" },
-  { name: "Michael Strader", image: "/images/rep-06.jpg" },
-  { name: "Kimberli Strader", image: "/images/rep-07.jpg" },
-  { name: "R2 Gaming", image: "/images/rep-08.jpg" },
+  { name: "Foo Shee Design", image: "/images/rep-01.jpg", segments: ["Hospitality"] },
+  { name: "Gitchi Gaming", image: "/images/rep-02.jpg", segments: ["Casino"] },
+  { name: "Phat Sourching", image: "/images/rep-03.jpg", segments: ["Hospitality"] },
+  { name: "Ken Deemer", image: "/images/rep-04.jpg", segments: ["Casino", "Hospitality"] },
+  { name: "Sean Smith", image: "/images/rep-05.jpg", segments: ["Casino"] },
+  { name: "Michael Strader", image: "/images/rep-06.jpg", segments: ["Casino", "Hospitality"] },
+  { name: "Kimberli Strader", image: "/images/rep-07.jpg", segments: ["Hospitality"] },
+  { name: "R2 Gaming", image: "/images/rep-08.jpg", segments: ["Casino"] },
 ];
 
 export type TradeShow = {

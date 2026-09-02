@@ -5,10 +5,12 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import SiteSearch from "./SiteSearch";
 import { NAV_LINKS } from "@/content/navigation";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   // Home floats the nav as glass over the hero photo; inner pages use the
@@ -94,7 +96,13 @@ export default function Header() {
         </nav>
 
         <div className="hidden shrink-0 items-center gap-4 lg:flex">
-          <button type="button" className="flex items-center justify-center p-2" aria-label="Search">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            aria-expanded={searchOpen}
+            className="flex items-center justify-center p-2"
+            aria-label="Search"
+          >
             <Image src="/images/icon-search.svg" alt="" width={20} height={20} className={cn("size-5", light && "invert")} />
           </button>
           <Link
@@ -151,6 +159,8 @@ export default function Header() {
           </nav>
         ) : null}
       </div>
+
+      <SiteSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }
