@@ -72,7 +72,17 @@ figures before launch:
 
 ## Images
 
-Catalogue artwork is served by the backend from `/uploads`, and falls back to
-`www.garyplatt.com` when it has not been downloaded locally. Both hosts are
-allowed in `images.remotePatterns` in `next.config.ts`; add your production
-media host there before deploying.
+Catalogue artwork lives on the backend under `/uploads`. `next.config.ts`
+**proxies `/uploads` to the backend** rather than linking to it directly, so the
+browser only ever sees same-origin image paths.
+
+That is not just tidiness. Next 16 refuses to optimise an absolute image URL
+whose hostname resolves to a private IP — which is exactly what
+`http://localhost:4000` is in development — and reports it as
+`"url" parameter is not allowed`, so every image silently fails to render.
+Proxying keeps them local, avoids the `images.dangerouslyAllowLocalIP` escape
+hatch, and means the site never needs to know the backend's public hostname.
+
+The one remaining remote source is `www.garyplatt.com`, which the backend's seed
+falls back to when artwork has not been downloaded locally; it is allowed in
+`images.remotePatterns`. Add any other production media host there.

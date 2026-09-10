@@ -316,11 +316,15 @@ async function get<T>(path: string, fallback: T, revalidate = REVALIDATE): Promi
 
 const EMPTY_PAGE = { data: [], meta: { page: 1, perPage: 0, total: 0, totalPages: 0, hasNext: false, hasPrev: false } };
 
-/** Absolute URL for an image the API returned, which may be a relative upload. */
+/**
+ * Resolves an image path the API returned.
+ *
+ * Uploads stay relative: `next.config.ts` proxies /uploads to the backend, so
+ * the browser sees a same-origin path. Absolute URLs (the seed's fallback to
+ * garyplatt.com) are passed through untouched.
+ */
 export function imageUrl(src: string | null | undefined, fallback = ""): string {
   if (!src) return fallback;
-  if (/^https?:\/\//i.test(src)) return src;
-  if (src.startsWith("/uploads/")) return `${API_URL.replace(/\/api\/v1$/, "")}${src}`;
   return src;
 }
 
