@@ -3,26 +3,47 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
-import { EVENT_DETAILS } from "@/content/event-detail";
+import { getEvent, getEvents, imageUrl } from "@/lib/api";
 
-export function generateStaticParams() {
-  return EVENT_DETAILS.map(({ slug }) => ({ slug }));
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const events = await getEvents();
+  return events.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/events/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const event = EVENT_DETAILS.find((e) => e.slug === slug);
-  return { title: event?.title ?? "Event Details", description: event?.intro };
+  const event = await getEvent(slug);
+  return { title: event?.name ?? "Event Details", description: event?.intro ?? undefined };
 }
 
 export default async function EventDetailPage({
   params,
 }: PageProps<"/events/[slug]">) {
   const { slug } = await params;
-  const event = EVENT_DETAILS.find((e) => e.slug === slug);
-  if (!event) notFound();
+  const record = await getEvent(slug);
+  if (!record) notFound();
+
+  const starts = new Date(record.startsOn);
+
+  // The date card wants the parts split out.
+  const event = {
+    title: record.name,
+    image: imageUrl(record.image, "/images/event-san-diego.jpg"),
+    alt: record.imageAlt ?? `${record.name} venue`,
+    intro: record.intro,
+    sections: record.sections,
+    when: {
+      day: starts.getUTCDate().toString(),
+      month: starts.toLocaleString("en-GB", { month: "short", timeZone: "UTC" }).toUpperCase(),
+      weekday: starts.toLocaleString("en-GB", { weekday: "long", timeZone: "UTC" }),
+      time: record.timeLabel ?? record.dateLabel,
+    },
+    address: record.address ?? record.location,
+  };
 
   return (
     <>

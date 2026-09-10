@@ -5,6 +5,7 @@ import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import { FABRIC_BRANDS } from "@/content/resources";
 import { DOCUMENT_REQUEST_HREF } from "@/content/navigation";
+import { getFabricBrands, imageUrl } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Upholstery",
@@ -12,7 +13,29 @@ export const metadata: Metadata = {
     "Performance upholstery from Ultrafabrics, Momentum, Designtex, Brentano and more.",
 };
 
-export default function UpholsteryPage() {
+export const revalidate = 300;
+
+export default async function UpholsteryPage() {
+  const published = await getFabricBrands();
+
+  // The live mills carry no logo files, so the design's artwork stands in.
+  const logoFor = (slug: string, fallback: string) => {
+    const match = FABRIC_BRANDS.find(
+      (brand) => brand.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") === slug,
+    );
+    return match?.logo ?? fallback;
+  };
+
+  const brands =
+    published.length > 0
+      ? published.map((brand) => ({
+          name: brand.name,
+          body: brand.body ?? "",
+          logo: imageUrl(brand.logo, logoFor(brand.slug, "/images/fabric-ultrafabrics.png")),
+          href: brand.websiteUrl ?? DOCUMENT_REQUEST_HREF,
+        }))
+      : FABRIC_BRANDS.map((brand) => ({ ...brand, href: DOCUMENT_REQUEST_HREF }));
+
   return (
     <>
       <PageHero
@@ -22,7 +45,7 @@ export default function UpholsteryPage() {
 
       <Container className="pb-section">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {FABRIC_BRANDS.map(({ name, body, logo }) => (
+          {brands.map(({ name, body, logo, href }) => (
             <article key={name} className="flex flex-col items-center text-center">
               <div className="flex aspect-square w-full items-center justify-center overflow-hidden bg-surface p-8">
                 <Image
@@ -40,7 +63,7 @@ export default function UpholsteryPage() {
               </h2>
               <p className="pt-2 text-copy leading-relaxed text-muted">{body}</p>
 
-              <Button href={DOCUMENT_REQUEST_HREF} variant="outline" className="mt-5 h-11 text-sm">
+              <Button href={href} variant="outline" className="mt-5 h-11 text-sm">
                 View Collection
               </Button>
             </article>

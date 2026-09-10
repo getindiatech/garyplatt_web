@@ -3,7 +3,8 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import JobList from "@/components/sections/JobList";
-import { CAREERS_VALUES, JOB_CATEGORIES, OPEN_POSITIONS } from "@/content/careers";
+import { CAREERS_VALUES, OPEN_POSITIONS } from "@/content/careers";
+import { getJobCategories, getJobs } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Career With Us",
@@ -11,7 +12,33 @@ export const metadata: Metadata = {
     "Open positions at Gary Platt Seating — engineering, upholstery and materials science.",
 };
 
-export default function CareersPage() {
+export const revalidate = 300;
+
+const DATE = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
+
+export default async function CareersPage() {
+  const [jobs, jobCategories] = await Promise.all([getJobs(), getJobCategories()]);
+
+  // "All" leads the filter rail, then only categories that have a live posting.
+  const categories = [
+    "All",
+    ...jobCategories.filter((c) => (c._count?.jobs ?? 0) > 0).map((c) => c.name),
+  ];
+
+  const listed = jobs.map((job) => ({
+    slug: job.slug,
+    category: job.category.name,
+    title: job.title,
+    body: job.summary,
+    type: job.employmentType.replace(/_/g, " ").toLowerCase(),
+    location: job.isRemote ? `${job.location} · Remote friendly` : job.location,
+    deadline: job.deadline ? `Deadline: ${DATE.format(new Date(job.deadline))}` : undefined,
+  }));
+
   return (
     <>
       <PageHero
@@ -58,11 +85,17 @@ export default function CareersPage() {
           {OPEN_POSITIONS.title}
         </h2>
 
-        <JobList
-          categories={JOB_CATEGORIES}
-          categoriesTitle={OPEN_POSITIONS.categoriesTitle}
-          jobs={OPEN_POSITIONS.jobs}
-        />
+        {listed.length > 0 ? (
+          <JobList
+            categories={categories}
+            categoriesTitle={OPEN_POSITIONS.categoriesTitle}
+            jobs={listed}
+          />
+        ) : (
+          <p className="pt-10 text-copy leading-relaxed text-muted">
+            There are no open positions right now. Please check back soon.
+          </p>
+        )}
       </Container>
     </>
   );

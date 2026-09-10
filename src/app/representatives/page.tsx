@@ -5,13 +5,26 @@ import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import RepresentativeList from "@/components/sections/RepresentativeList";
 import { REPRESENTATIVES_INTRO } from "@/content/company";
+import { getRepresentatives, imageUrl } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Representatives",
   description: REPRESENTATIVES_INTRO,
 };
 
-export default function RepresentativesPage() {
+export const revalidate = 300;
+
+export default async function RepresentativesPage() {
+  const reps = await getRepresentatives();
+
+  const cards = reps.map((rep) => ({
+    slug: rep.slug,
+    name: rep.name,
+    image: imageUrl(rep.image, "/images/rep-01.jpg"),
+    email: rep.email,
+    segments: rep.segments,
+  }));
+
   return (
     <>
       <PageHero title="Representatives" />
@@ -22,7 +35,7 @@ export default function RepresentativesPage() {
         </h2>
 
         <Suspense fallback={null}>
-          <RepresentativeList />
+          <RepresentativeList representatives={cards} />
         </Suspense>
 
         <div className="relative mx-auto mt-16 aspect-[1520/579] w-full max-w-[1520px] overflow-hidden">

@@ -2,17 +2,41 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
-import { EVENTS_INTRO, TRADE_SHOWS } from "@/content/company";
+import { EVENTS_INTRO } from "@/content/company";
+import { getEvents, imageUrl } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "News & Events",
   description: EVENTS_INTRO.body,
 };
 
-/** The design repeats the two shows over a 2x2 grid. */
-const GRID = [...TRADE_SHOWS, ...TRADE_SHOWS];
+export const revalidate = 300;
 
-export default function EventsPage() {
+const RANGE = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+export default async function EventsPage() {
+  const events = await getEvents(true);
+
+  const GRID = events.map((event) => ({
+    slug: event.slug,
+    code: event.code ?? event.name.slice(0, 3).toUpperCase(),
+    name: event.name,
+    // Editors can pre-render the range as printed; otherwise derive it.
+    date:
+      event.dateLabel ??
+      [event.startsOn, event.endsOn]
+        .filter(Boolean)
+        .map((value) => RANGE.format(new Date(value as string)))
+        .join(" - "),
+    location: event.location,
+    image: imageUrl(event.image, "/images/event-san-diego.jpg"),
+    alt: event.imageAlt ?? `${event.name} venue`,
+  }));
+
   return (
     <>
       <PageHero
@@ -30,10 +54,16 @@ export default function EventsPage() {
           </p>
         </div>
 
+        {GRID.length === 0 ? (
+          <p className="pt-10 text-center text-copy leading-relaxed text-muted">
+            No upcoming shows are scheduled. Please check back soon.
+          </p>
+        ) : null}
+
         <div className="mx-auto mt-10 grid max-w-[1280px] grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8">
-          {GRID.map((event, i) => (
+          {GRID.map((event) => (
             <article
-              key={`${event.code}-${i}`}
+              key={event.slug}
               className="relative flex flex-col overflow-hidden border-[0.638px] border-[rgba(57,49,44,0.3)] bg-[rgba(23,17,14,0.4)] p-px pt-[23.5%] shadow-[0_15.946px_31.891px_-7.654px_rgba(0,0,0,0.25)] md:border md:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]"
             >
               <Image
@@ -93,7 +123,7 @@ export default function EventsPage() {
                     </div>
 
                     <a
-                      href={`/events/${event.code.toLowerCase()}`}
+                      href={`/events/${event.slug}`}
                       className="inline-flex h-8 shrink-0 items-center justify-center gap-[5px] whitespace-nowrap border-[0.638px] border-ink-strong bg-button-dark pl-3 pr-2 text-[clamp(0.75rem,0.4vw+0.65rem,1rem)] font-medium text-[#f5f5f5] transition-opacity hover:opacity-88 md:h-14 md:gap-2 md:border md:px-6"
                     >
                       View Details

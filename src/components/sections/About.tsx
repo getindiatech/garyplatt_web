@@ -3,14 +3,28 @@ import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Button from "@/components/ui/Button";
+import { getPage } from "@/lib/api";
 
+/**
+ * The design's figures, kept so the band still reads. They are the template's
+ * invention, not Gary Platt's numbers - replace them in the dashboard.
+ */
 const STATS = [
   { value: "38+", label: "Years of Excellence" },
   { value: "2,500+", label: "Projects Completed" },
   { value: "95%", label: "Client Satisfaction" },
 ];
 
-export default function About() {
+export default async function About() {
+  const page = await getPage("about");
+
+  const paragraphs = (page?.blocks ?? [])
+    .filter((block) => block.type === "prose" && block.body)
+    .map((block) => block.body as string);
+
+  const eyebrow = page?.intro ?? "About Gary Platt";
+  const heading = page?.title;
+
   return (
     <Section className="bg-surface" id="about">
       <Container>
@@ -48,25 +62,26 @@ export default function About() {
           {/* --- Copy --- */}
           <div className="order-1 flex flex-col items-stretch py-2.5 md:order-2 md:items-start md:py-0">
             <div className="w-full text-center md:text-left">
-              <Eyebrow>About Atelier Luxe</Eyebrow>
+              <Eyebrow>{eyebrow}</Eyebrow>
               <h2 className="pt-3 font-display text-section font-medium leading-tight tracking-tight text-ink md:pt-4">
-                Crafting Timeless
-                <span className="block md:italic">Elegance</span>
+                {heading ?? (
+                  <>
+                    Crafting Timeless
+                    <span className="block md:italic">Elegance</span>
+                  </>
+                )}
               </h2>
             </div>
 
             <p className="pt-8 text-center text-copy leading-relaxed text-muted md:pt-6 md:text-left">
-              Founded in 1985, Atelier Luxe has established itself as a premier
-              destination for discerning clients seeking exceptional interior
-              design and bespoke furniture. Our philosophy centers on the belief
-              that true luxury lies in the details — the perfect proportions, the
-              finest materials, and the masterful execution.
+              {paragraphs[0] ??
+                "Gary Platt Manufacturing builds seating for the places people stay in the longest, made at our plant in Reno, Nevada."}
             </p>
-            <p className="hidden pt-6 text-copy leading-relaxed text-muted md:block md:text-left">
-              Each project we undertake is a collaborative journey, where your
-              vision meets our expertise to create spaces that are not just
-              beautiful, but deeply personal and timeless.
-            </p>
+            {paragraphs[1] ? (
+              <p className="hidden pt-6 text-copy leading-relaxed text-muted md:block md:text-left">
+                {paragraphs[1]}
+              </p>
+            ) : null}
 
             <div className="mt-6 grid w-full grid-cols-2 gap-5 md:mt-10 md:grid-cols-3 md:gap-8 md:border-t md:border-[#e5e2dc] md:pt-8">
               {STATS.map(({ value, label }, i) => (

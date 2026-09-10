@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { searchSite } from "@/content/search";
+import { searchSiteApi, type SearchHit } from "@/lib/api";
 
 /** Header search: an overlay that filters the page index as you type. */
 export default function SiteSearch({
@@ -14,8 +14,28 @@ export default function SiteSearch({
   onClose: () => void;
 }) {
   const [query, setQuery] = useState("");
+  const [results, setResults] = useState<SearchHit[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const results = useMemo(() => searchSite(query), [query]);
+  // Debounced so typing does not fire a request per keystroke; the in-flight
+  // request is aborted when the query moves on. Every state update happens in
+  // the timer callback rather than the effect body, so no cascading render.
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const timer = setTimeout(() => {
+      const q = query.trim();
+      if (q.length < 2) {
+        setResults([]);
+        return;
+      }
+      void searchSiteApi(q, controller.signal).then(setResults);
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [query]);
 
   // Every dismissal path funnels through here so the box always reopens empty.
   const close = useCallback(() => {

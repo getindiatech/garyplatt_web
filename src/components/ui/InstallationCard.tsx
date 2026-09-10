@@ -7,15 +7,18 @@ export default function InstallationCard({
   item,
   ratio,
   withLink,
+  href = "/gallery/project",
 }: {
   item: Installation;
   /** Design ratio, applied from sm up; phones get a taller card for the caption. */
   ratio: string;
   withLink?: boolean;
+  /** Case study this tile links to. */
+  href?: string;
 }) {
   return (
     <Link
-      href="/gallery/project"
+      href={href}
       className={cn(
         "group relative block aspect-(--card-ratio) overflow-hidden",
         // Featured tiles are wide and short; on phones that leaves no room for

@@ -5,17 +5,14 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 import Button from "@/components/ui/Button";
 import { DOCUMENT_REQUEST_HREF } from "@/content/navigation";
-import {
-  FINISH_SWATCHES,
-  FINISH_TABS,
-  HANDLE_FINISHES,
-  POWDER_COATS,
-} from "@/content/finishes";
+import { FINISH_TABS } from "@/content/finishes";
 
-function SwatchGrid() {
+export type FinishItem = { name: string; image: string };
+
+function SwatchGrid({ items }: { items: FinishItem[] }) {
   return (
     <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-      {FINISH_SWATCHES.map(({ name, image }) => (
+      {items.map(({ name, image }) => (
         <figure key={name} className="flex flex-col items-start">
           <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-surface">
             <Image
@@ -60,7 +57,17 @@ function CardGrid({ items }: { items: { name: string; image: string }[] }) {
   );
 }
 
-export default function FinishTabs() {
+export default function FinishTabs({
+  swatches,
+  edgeMoldings,
+  handles,
+  powderCoats,
+}: {
+  swatches: FinishItem[];
+  edgeMoldings: FinishItem[];
+  handles: FinishItem[];
+  powderCoats: FinishItem[];
+}) {
   const [tab, setTab] = useState(0);
   const active = FINISH_TABS[tab];
 
@@ -94,17 +101,22 @@ export default function FinishTabs() {
 
       {"count" in active && active.count ? (
         <p className="text-[clamp(0.6875rem,0.2vw+0.64rem,0.75rem)] leading-normal text-muted">
-          {active.count}
+          {tab === 0
+            ? `${swatches.length} finishes available`
+            : tab === 2
+              ? `${handles.length + powderCoats.length} finishes available`
+              : active.count}
         </p>
       ) : null}
 
       {tab === 2 ? (
         <div className="flex flex-col gap-14">
-          <CardGrid items={HANDLE_FINISHES} />
-          <CardGrid items={POWDER_COATS} />
+          <CardGrid items={handles} />
+          <CardGrid items={powderCoats} />
         </div>
       ) : (
-        <SwatchGrid />
+        // Tab 1 is the edge mouldings sheet; both it and tab 0 read as swatches.
+        <SwatchGrid items={tab === 1 && edgeMoldings.length > 0 ? edgeMoldings : swatches} />
       )}
 
       {tab === 1 ? (

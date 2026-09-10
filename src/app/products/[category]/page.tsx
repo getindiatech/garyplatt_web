@@ -3,32 +3,39 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import CasinoCatalogue from "@/components/sections/CasinoCatalogue";
-import {
-  PRODUCT_CATEGORY_PAGES,
-  type ProductCategorySlug,
-} from "@/content/products";
+import { getCategories, getCategory, imageUrl } from "@/lib/api";
 
 type Params = { params: Promise<{ category: string }> };
 
-export function generateStaticParams() {
-  return Object.keys(PRODUCT_CATEGORY_PAGES).map((category) => ({ category }));
-}
+export const revalidate = 300;
 
-function getCategory(slug: string) {
-  return PRODUCT_CATEGORY_PAGES[slug as ProductCategorySlug];
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  return categories.map((category) => ({ category: category.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { category } = await params;
-  const page = getCategory(category);
+  const page = await getCategory(category);
   if (!page) return {};
-  return { title: `${page.name} Seating`, description: page.intro };
+
+  return {
+    title: page.seoTitle ?? `${page.name} Seating`,
+    description: page.seoDescription ?? page.intro ?? undefined,
+  };
 }
 
 export default async function ProductCategoryPage({ params }: Params) {
   const { category } = await params;
-  const page = getCategory(category);
+  const page = await getCategory(category);
   if (!page) notFound();
+
+  const products = page.products.map((product) => ({
+    slug: product.slug,
+    name: product.name,
+    tier: product.tier,
+    image: imageUrl(product.heroImage, "/images/casino-bella.png"),
+  }));
 
   return (
     <>
@@ -45,12 +52,14 @@ export default async function ProductCategoryPage({ params }: Params) {
         <h2 className="font-display text-[clamp(1.5rem,1.2vw+1.1rem,1.875rem)] font-medium leading-tight text-ink">
           {page.name} Seating
         </h2>
-        <p className="mx-auto max-w-[900px] pt-4 text-copy leading-relaxed text-muted">
-          {page.intro}
-        </p>
+        {page.intro ? (
+          <p className="mx-auto max-w-[900px] pt-4 text-copy leading-relaxed text-muted">
+            {page.intro}
+          </p>
+        ) : null}
       </Container>
 
-      <CasinoCatalogue />
+      <CasinoCatalogue products={products} categorySlug={page.slug} />
     </>
   );
 }

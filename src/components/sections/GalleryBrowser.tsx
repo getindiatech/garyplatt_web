@@ -4,46 +4,40 @@ import { useMemo, useState } from "react";
 import Button from "@/components/ui/Button";
 import InstallationCard from "@/components/ui/InstallationCard";
 import { Input, Select } from "@/components/ui/Field";
-import {
-  ALL_INSTALLATIONS,
-  FEATURED_INSTALLATIONS,
-  GALLERY_INTRO,
-  type Installation,
-} from "@/content/gallery";
+import { GALLERY_INTRO, type Installation } from "@/content/gallery";
 
 const PAGE_SIZE = 8;
 
-/** Country is the trailing part of an installation's "City, Country" line. */
-function countryOf(item: Installation) {
-  return item.location.split(",").pop()!.trim();
-}
+export type GalleryItem = Installation & { slug: string; featured: boolean };
 
-const COUNTRIES = [
-  ...new Set([...FEATURED_INSTALLATIONS, ...ALL_INSTALLATIONS].map(countryOf)),
-].sort();
-
-export default function GalleryBrowser() {
+export default function GalleryBrowser({
+  installations,
+  countries,
+}: {
+  installations: GalleryItem[];
+  countries: string[];
+}) {
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState("");
   const [shown, setShown] = useState(PAGE_SIZE);
 
   const match = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return (item: Installation) =>
+    return (item: GalleryItem) =>
       (!q ||
         item.name.toLowerCase().includes(q) ||
         item.location.toLowerCase().includes(q)) &&
-      (!country || countryOf(item) === country);
+      (!country || item.location.endsWith(country));
   }, [query, country]);
 
-  const featured = FEATURED_INSTALLATIONS.filter(match);
-  const all = ALL_INSTALLATIONS.filter(match);
+  const matching = installations.filter(match);
+  const featured = matching.filter((item) => item.featured);
+  const all = matching;
   const filtering = query.trim() !== "" || country !== "";
   const remaining = all.length - shown;
 
   return (
     <>
-      {/* Search + country filter */}
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[1fr_320px]">
         <Input
           type="search"
@@ -64,7 +58,7 @@ export default function GalleryBrowser() {
           }}
         >
           <option value="">{GALLERY_INTRO.countryPlaceholder}</option>
-          {COUNTRIES.map((c) => (
+          {countries.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
@@ -72,7 +66,7 @@ export default function GalleryBrowser() {
         </Select>
       </div>
 
-      {featured.length === 0 && all.length === 0 ? (
+      {matching.length === 0 ? (
         <p className="py-16 text-center text-copy leading-relaxed text-muted">
           No installations match that search. Try a different venue or country.
         </p>
@@ -86,10 +80,11 @@ export default function GalleryBrowser() {
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {featured.map((item) => (
               <InstallationCard
-                key={item.name}
+                key={item.slug}
                 item={item}
                 ratio="402 / 250"
                 withLink
+                href={`/gallery/${item.slug}`}
               />
             ))}
           </div>
@@ -103,7 +98,12 @@ export default function GalleryBrowser() {
           </h3>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {all.slice(0, shown).map((item) => (
-              <InstallationCard key={item.image} item={item} ratio="402 / 480" />
+              <InstallationCard
+                key={`${item.slug}-${item.image}`}
+                item={item}
+                ratio="402 / 480"
+                href={`/gallery/${item.slug}`}
+              />
             ))}
           </div>
 

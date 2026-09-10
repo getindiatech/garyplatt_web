@@ -5,14 +5,20 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { TESTIMONIALS } from "@/content/home";
 
-export default function Testimonials() {
-  const [index, setIndex] = useState(1);
+export type TestimonialSlide = {
+  quote: string;
+  name: string;
+  role: string;
+  avatar: string;
+};
+
+export default function Testimonials({ items }: { items: TestimonialSlide[] }) {
+  const [index, setIndex] = useState(items.length > 2 ? 1 : 0);
 
   const go = (delta: number) =>
     setIndex(
-      (current) => (current + delta + TESTIMONIALS.length) % TESTIMONIALS.length,
+      (current) => (current + delta + items.length) % items.length,
     );
 
   return (
@@ -27,7 +33,7 @@ export default function Testimonials() {
               className="flex translate-x-[calc(var(--index)*-1*(var(--slide-w)+var(--slide-gap)))] transition-transform duration-[550ms] ease-[cubic-bezier(0.4,0,0.2,1)] [--slide-gap:0.5rem] [--slide-w:min(21.875rem,82vw)] md:[--slide-gap:0px] md:[--slide-w:100%]"
               style={{ "--index": index } as React.CSSProperties}
             >
-              {TESTIMONIALS.map(({ quote, name, role, avatar }) => (
+              {items.map(({ quote, name, role, avatar }) => (
                 <div
                   key={name}
                   className="mr-[var(--slide-gap)] shrink-0 basis-[var(--slide-w)] md:mr-0 md:px-4"

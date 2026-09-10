@@ -4,13 +4,28 @@ import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import Button from "@/components/ui/Button";
 import { OEM_INTRO, OEM_PARTNERS, OEM_WHY } from "@/content/oem";
+import { getOemPartners, imageUrl } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "OEM Partnerships",
   description: OEM_INTRO,
 };
 
-export default function OemPartnershipsPage() {
+export const revalidate = 300;
+
+export default async function OemPartnershipsPage() {
+  const published = await getOemPartners();
+
+  const partners =
+    published.length > 0
+      ? published.map((brand) => ({
+          logo: imageUrl(brand.logo, "/images/oem-logo-1.png"),
+          blurb: brand.body ?? `Seating programmes for ${brand.name}.`,
+          since: brand.name,
+          square: false,
+        }))
+      : OEM_PARTNERS;
+
   return (
     <>
       <PageHero title="OEM Partnerships" />
@@ -21,8 +36,8 @@ export default function OemPartnershipsPage() {
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-          {OEM_PARTNERS.map(({ logo, blurb, since, square }) => (
-            <article key={blurb} className="flex flex-col items-start">
+          {partners.map(({ logo, blurb, since, square }) => (
+            <article key={`${since}-${blurb}`} className="flex flex-col items-start">
               <div className="flex h-[126px] w-full items-center justify-start">
                 <Image
                   src={logo}

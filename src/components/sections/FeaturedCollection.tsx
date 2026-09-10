@@ -5,8 +5,22 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ArrowLink from "@/components/ui/ArrowLink";
 import { PRODUCTS } from "@/content/home";
+import { getProducts, imageUrl } from "@/lib/api";
 
-export default function FeaturedCollection() {
+export default async function FeaturedCollection() {
+  const featured = await getProducts({ featured: "true", perPage: 4 });
+
+  // Fall back to the design's line-up until an editor flags products as featured.
+  const items =
+    featured.data.length > 0
+      ? featured.data.map((product) => ({
+          title: product.name,
+          image: imageUrl(product.heroImage, "/images/product-nyx-armchair.png"),
+          alt: product.tagline ?? product.name,
+          href: `/products/${product.category.slug}`,
+        }))
+      : PRODUCTS.map((product) => ({ ...product, href: "/products/casino" }));
+
   return (
     <Section className="bg-white" id="products">
       <Container>
@@ -23,7 +37,7 @@ export default function FeaturedCollection() {
         />
 
         <div className="mt-8 grid grid-cols-2 gap-3 xl:mt-16 xl:grid-cols-4 xl:gap-6">
-          {PRODUCTS.map(({ title, image, alt }) => (
+          {items.map(({ title, image, alt, href }) => (
             <article
               key={title}
               className="flex flex-col gap-[clamp(0.9rem,1.7vw,2rem)] border-[0.447px] border-card-border bg-white p-[clamp(0.56rem,1vw,1.25rem)] transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(3,7,18,0.18)] md:border"
@@ -44,7 +58,7 @@ export default function FeaturedCollection() {
                   {title}
                 </h3>
                 <Link
-                  href="/products/casino"
+                  href={href}
                   aria-label={title}
                   className="relative inline-flex size-[clamp(1.34rem,2.5vw,3rem)] shrink-0 items-center justify-center rounded-full border-[0.447px] border-ink-strong bg-button-dark transition-opacity after:absolute after:-inset-1.5 after:content-[''] hover:opacity-85 md:border md:after:hidden"
                 >

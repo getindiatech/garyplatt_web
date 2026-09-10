@@ -1,19 +1,68 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Field, Input, Textarea } from "@/components/ui/Field";
 import { QUOTE_PRODUCT } from "@/content/quote";
+import { submitQuote } from "@/lib/api";
+
+export type QuoteSelection = {
+  groupSlug: string;
+  valueSlug: string;
+  /** Human-readable pair for the summary panel. */
+  label: string;
+  value: string;
+};
 
 type QuoteModalProps = {
   open: boolean;
   onClose: () => void;
-  /** Label/value pairs shown in the summary panel. */
-  config: { label: string; value: string }[];
+  productSlug: string;
+  productName: string;
+  selections: QuoteSelection[];
 };
 
-export default function QuoteModal({ open, onClose, config }: QuoteModalProps) {
+export default function QuoteModal({
+  open,
+  onClose,
+  productSlug,
+  productName,
+  selections,
+}: QuoteModalProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [reference, setReference] = useState<string | null>(null);
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setState("sending");
+    setError(null);
+
+    const form = new FormData(event.currentTarget);
+    const result = await submitQuote({
+      fullName: String(form.get("name") ?? ""),
+      email: String(form.get("email") ?? ""),
+      phone: String(form.get("phone") ?? ""),
+      company: String(form.get("company") ?? ""),
+      street: String(form.get("street") ?? "") || undefined,
+      city: String(form.get("city") ?? "") || undefined,
+      country: String(form.get("country") ?? "") || undefined,
+      message: String(form.get("message") ?? ""),
+      productSlug,
+      source: "configurator",
+      selections: selections.map(({ groupSlug, valueSlug }) => ({ groupSlug, valueSlug })),
+    });
+
+    if (!result.ok) {
+      setError(result.message);
+      setState("idle");
+      return;
+    }
+
+    setReference(result.reference ?? null);
+    setState("sent");
+  }
 
   // Close on Escape and lock the page behind the dialog.
   useEffect(() => {
@@ -53,7 +102,7 @@ export default function QuoteModal({ open, onClose, config }: QuoteModalProps) {
               id="quote-modal-title"
               className="pt-2 font-display text-[clamp(1.25rem,1vw+1rem,1.5rem)] font-medium leading-tight text-ink"
             >
-              {QUOTE_PRODUCT.name}
+              {productName}
             </h2>
           </div>
           <button
@@ -74,7 +123,7 @@ export default function QuoteModal({ open, onClose, config }: QuoteModalProps) {
             <div className="relative mx-auto aspect-[260/264] w-full max-w-[260px]">
               <Image
                 src={QUOTE_PRODUCT.preview}
-                alt={`${QUOTE_PRODUCT.name} configured`}
+                alt={`${productName} configured`}
                 width={260}
                 height={264}
                 sizes="260px"
@@ -86,8 +135,14 @@ export default function QuoteModal({ open, onClose, config }: QuoteModalProps) {
               Your Configuration
             </h3>
 
+            {selections.length === 0 ? (
+              <p className="pt-4 text-copy leading-relaxed text-muted">
+                No options chosen yet — our team will talk you through them.
+              </p>
+            ) : null}
+
             <dl className="flex flex-col gap-3 pt-4">
-              {config.map(({ label, value }) => (
+              {selections.map(({ label, value }) => (
                 <div key={label} className="flex items-baseline justify-between gap-4">
                   <dt className="text-copy leading-normal text-muted">{label}</dt>
                   <dd className="text-copy font-medium leading-normal text-ink">
@@ -99,7 +154,31 @@ export default function QuoteModal({ open, onClose, config }: QuoteModalProps) {
           </div>
 
           {/* ===== Enquiry form ===== */}
-          <form className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {state === "sent" ? (
+            <div className="flex flex-col justify-center">
+              <h3 className="font-display text-[clamp(1.25rem,1vw+1rem,1.5rem)] font-medium leading-tight text-ink">
+                Your request is with our sales team
+              </h3>
+              <p className="pt-3 text-copy leading-relaxed text-muted">
+                Thank you. We will come back to you with pricing and lead times
+                for the {productName}.
+              </p>
+              {reference ? (
+                <p className="pt-4 text-copy leading-relaxed text-ink">
+                  Your reference is <strong>{reference}</strong> — quote it if you
+                  need to chase the request.
+                </p>
+              ) : null}
+              <button
+                type="button"
+                onClick={onClose}
+                className="mt-8 inline-flex h-11 w-fit items-center justify-center rounded-sm border border-ink-strong bg-button-dark px-8 text-sm font-medium text-[#f5f5f5] transition-opacity hover:opacity-88"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+          <form onSubmit={onSubmit} className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <Field label="Full Name" required htmlFor="q-name" className="sm:col-span-2">
               <Input id="q-name" name="name" required placeholder="Enter Full Name" />
             </Field>
@@ -129,15 +208,23 @@ export default function QuoteModal({ open, onClose, config }: QuoteModalProps) {
               <Textarea id="q-message" name="message" rows={5} required placeholder="Write Here..." />
             </Field>
 
+            {error ? (
+              <p role="alert" className="bg-surface p-4 text-copy leading-relaxed text-ink sm:col-span-2">
+                {error}
+              </p>
+            ) : null}
+
             <div className="sm:col-span-2">
               <button
                 type="submit"
-                className="inline-flex h-11 w-full items-center justify-center rounded-sm border border-ink-strong bg-button-dark px-8 text-sm font-medium text-[#f5f5f5] transition-opacity hover:opacity-88 sm:w-auto"
+                disabled={state === "sending"}
+                className="inline-flex h-11 w-full items-center justify-center rounded-sm border border-ink-strong bg-button-dark px-8 text-sm font-medium text-[#f5f5f5] transition-opacity hover:opacity-88 disabled:opacity-60 sm:w-auto"
               >
-                Send Request
+                {state === "sending" ? "Sending..." : "Send Request"}
               </button>
             </div>
           </form>
+          )}
         </div>
       </div>
     </div>

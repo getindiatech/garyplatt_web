@@ -5,8 +5,21 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ArrowLink from "@/components/ui/ArrowLink";
 import { PROJECTS } from "@/content/home";
+import { getProjects, imageUrl } from "@/lib/api";
 
-export default function FeaturedProjects() {
+export default async function FeaturedProjects() {
+  const featured = await getProjects({ featured: "true", perPage: 4 });
+
+  const items =
+    featured.data.length > 0
+      ? featured.data.map((project) => ({
+          title: project.venueName,
+          meta: project.location,
+          image: imageUrl(project.coverImage, "/images/gallery-01.jpg"),
+          href: `/gallery/${project.slug}`,
+        }))
+      : PROJECTS.map((project) => ({ ...project, href: "/gallery" }));
+
   return (
     <Section className="bg-white" id="gallery">
       <Container>
@@ -23,10 +36,10 @@ export default function FeaturedProjects() {
         />
 
         <div className="mt-8 grid grid-cols-2 gap-3 xl:mt-16 xl:gap-5 2xl:gap-8">
-          {PROJECTS.map(({ title, meta, image }) => (
+          {items.map(({ title, meta, image, href }) => (
             <Link
               key={title}
-              href="/gallery/project"
+              href={href}
               className="group relative aspect-[193/144] overflow-hidden md:aspect-[896/672]"
             >
               <Image

@@ -2,17 +2,44 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
-import Button from "@/components/ui/Button";
-import { Field, Input, Select, Textarea } from "@/components/ui/Field";
 import RepLocator from "@/components/sections/RepLocator";
+import ContactForm from "@/components/sections/ContactForm";
 import { CONTACT_FORM, CONTACT_INFO } from "@/content/contact";
+import { getContactSettings, getTerritories } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description: CONTACT_INFO.body,
 };
 
-export default function ContactPage() {
+export const revalidate = 300;
+
+export default async function ContactPage() {
+  const [contact, territories] = await Promise.all([
+    getContactSettings(),
+    getTerritories(),
+  ]);
+
+  // Numbers come from site settings so staff can change them without a deploy.
+  const rows = CONTACT_INFO.rows.map((row) => {
+    const value =
+      row.label === "Fax"
+        ? contact.fax ?? row.value
+        : row.label === "E-mail"
+          ? contact.email ?? row.value
+          : row.value === CONTACT_INFO.rows[0].value
+            ? contact.phone ?? row.value
+            : contact.phoneAlt ?? row.value;
+
+    const href = row.href
+      ? row.href.startsWith("mailto:")
+        ? `mailto:${value}`
+        : `tel:${value.replace(/[^0-9+]/g, "")}`
+      : undefined;
+
+    return { ...row, value, href };
+  });
+
   return (
     <>
       <PageHero title="Contact Us" />
@@ -29,7 +56,7 @@ export default function ContactPage() {
             </p>
 
             <dl className="flex flex-col gap-6 pt-8">
-              {CONTACT_INFO.rows.map(({ icon, label, value, href }, i) => (
+              {rows.map(({ icon, label, value, href }, i) => (
                 <div key={`${label}-${i}`} className="flex items-center gap-5">
                   <span className="flex size-[60px] shrink-0 items-center justify-center rounded-full bg-surface">
                     <Image
@@ -82,83 +109,7 @@ export default function ContactPage() {
               {CONTACT_FORM.intro}
             </p>
 
-            <form className="grid grid-cols-1 gap-5 pt-8 sm:grid-cols-2">
-              <Field label="Full Name" required htmlFor="fullName">
-                <Input
-                  id="fullName"
-                  name="fullName"
-                  required
-                  placeholder="Enter Full Name"
-                />
-              </Field>
-              <Field label="Email Address" required htmlFor="email">
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Enter Email Address"
-                />
-              </Field>
-              <Field label="Contact Number" required htmlFor="phone">
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  placeholder="Enter Contact Number"
-                />
-              </Field>
-              <Field label="Zip Code" required htmlFor="zip">
-                <Input id="zip" name="zip" required placeholder="Enter Zip Code" />
-              </Field>
-
-              <Field label="Subject" htmlFor="subject" className="sm:col-span-2">
-                <Input id="subject" name="subject" placeholder="Enter Subject" />
-              </Field>
-
-              {/* The design labels this "Subject" as well; kept as drawn. */}
-              <Field label="Subject" htmlFor="message" className="sm:col-span-2">
-                <Textarea
-                  id="message"
-                  name="message"
-                  rows={7}
-                  placeholder="Write Here ..."
-                />
-              </Field>
-
-              <Field label="How did you hear of us?" required htmlFor="source">
-                <Select id="source" name="source" required defaultValue="Google">
-                  <option>Google</option>
-                  <option>Referral</option>
-                  <option>Trade show</option>
-                  <option>Social media</option>
-                  <option>Other</option>
-                </Select>
-              </Field>
-
-              <label
-                htmlFor="consent"
-                className="flex items-start gap-3 self-end pb-3 text-[clamp(0.8125rem,0.3vw+0.74rem,0.875rem)] leading-normal text-ink"
-              >
-                <input
-                  id="consent"
-                  name="consent"
-                  type="checkbox"
-                  className="mt-0.5 size-4 shrink-0 accent-ink"
-                />
-                {CONTACT_FORM.consent}
-              </label>
-
-              <div className="sm:col-span-2">
-                <Button
-                  type="submit"
-                  className="w-full justify-center sm:w-auto sm:px-16"
-                >
-                  {CONTACT_FORM.submit}
-                </Button>
-              </div>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </Container>
@@ -177,7 +128,7 @@ export default function ContactPage() {
             />
           </div>
 
-          <RepLocator />
+          <RepLocator territories={territories} />
         </div>
       </Container>
     </>
