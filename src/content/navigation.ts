@@ -26,6 +26,7 @@ export const NAV_LINKS: NavLink[] = [
     label: "Resources",
     href: "/resources/upholstery",
     children: [
+      { label: "Case Studies", href: "/resources/case-studies" },
       { label: "Upholstery", href: "/resources/upholstery" },
       { label: "Finishes", href: "/resources/finishes" },
       { label: "Look Book", href: "/resources/look-book" },
@@ -39,7 +40,7 @@ export const NAV_LINKS: NavLink[] = [
     href: "/gallery",
     children: [
       { label: "Gallery", href: "/gallery" },
-      { label: "Project Overview", href: "/gallery/project" },
+      { label: "Case Studies", href: "/resources/case-studies" },
     ],
   },
   { label: "Contact Us", href: "/contact" },

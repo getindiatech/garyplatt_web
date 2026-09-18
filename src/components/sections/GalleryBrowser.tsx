@@ -84,7 +84,7 @@ export default function GalleryBrowser({
                 item={item}
                 ratio="402 / 250"
                 withLink
-                href={`/gallery/${item.slug}`}
+                href={`/resources/case-studies/${item.slug}`}
               />
             ))}
           </div>
@@ -102,7 +102,7 @@ export default function GalleryBrowser({
                 key={`${item.slug}-${item.image}`}
                 item={item}
                 ratio="402 / 480"
-                href={`/gallery/${item.slug}`}
+                href={`/resources/case-studies/${item.slug}`}
               />
             ))}
           </div>

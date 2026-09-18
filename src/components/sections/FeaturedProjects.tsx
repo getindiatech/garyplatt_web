@@ -16,7 +16,7 @@ export default async function FeaturedProjects() {
           title: project.venueName,
           meta: project.location,
           image: imageUrl(project.coverImage, "/images/gallery-01.jpg"),
-          href: `/gallery/${project.slug}`,
+          href: `/resources/case-studies/${project.slug}`,
         }))
       : PROJECTS.map((project) => ({ ...project, href: "/gallery" }));
 

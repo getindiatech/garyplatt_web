@@ -5,6 +5,7 @@ import PageHero from "@/components/ui/PageHero";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Eyebrow from "@/components/ui/Eyebrow";
 import SeatConfigurator from "@/components/sections/SeatConfigurator";
+import DocumentList from "@/components/sections/DocumentList";
 import { MORE_COLLECTION, QUOTE_PRODUCT } from "@/content/quote";
 import { getProduct, getProducts, imageUrl } from "@/lib/api";
 
@@ -132,6 +133,13 @@ export default async function SendQuotePage({
               </div>
             </div>
           </div>
+
+          {/* ===== Instructions, spec sheets - only when staff attached any ===== */}
+          <DocumentList
+            documents={product?.documents ?? []}
+            heading="Downloads"
+            intro={`Instructions, specifications and care guidance for the ${configurable.name}.`}
+          />
 
           {/* ===== More from the range ===== */}
           {more.length > 0 ? (

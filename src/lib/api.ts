@@ -102,6 +102,17 @@ export interface OptionGroup {
   step?: number;
 }
 
+/** A PDF attached to a product or a case study. */
+export interface AttachedDocument {
+  slug: string;
+  kind: DocumentKind;
+  title: string;
+  description: string | null;
+  fileUrl: string;
+  pageCount: number | null;
+  sizeBytes: number | null;
+}
+
 export interface Product extends ProductCard {
   description: string | null;
   minOrderQty: number | null;
@@ -115,6 +126,7 @@ export interface Product extends ProductCard {
     location: string;
     coverImage: string | null;
   }[];
+  documents: AttachedDocument[];
 }
 
 export interface CategoryDetail extends CategoryCard {
@@ -170,11 +182,11 @@ export interface ProjectCard {
   country: string | null;
   countryCode: string | null;
   coverImage: string | null;
+  summary: string | null;
   isFeatured: boolean;
 }
 
 export interface ProjectDetail extends ProjectCard {
-  summary: string | null;
   completedOn: string | null;
   images: ProductImage[];
   sections: { title: string; body: string | null; items: string[] }[];
@@ -184,6 +196,7 @@ export interface ProjectDetail extends ProjectCard {
     heroImage: string | null;
     tagline: string | null;
   }[];
+  documents: AttachedDocument[];
 }
 
 export interface EventCard {

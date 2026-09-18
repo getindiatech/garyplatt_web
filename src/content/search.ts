@@ -17,7 +17,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
   { title: "Service Tables", href: "/products/service-table", section: "Products", keywords: "table beverage service floor plan" },
   { title: "Customize Your Seat", href: "/products/quote", section: "Products", keywords: "configurator request a quote base finish upholstery custom" },
   { title: "Gallery", href: "/gallery", section: "Gallery", keywords: "installations venues casinos projects photos" },
-  { title: "Project Overview", href: "/gallery/project", section: "Gallery", keywords: "case study installation detail" },
+  { title: "Case Studies", href: "/resources/case-studies", section: "Resources", keywords: "case study installation project detail venue" },
   { title: "Sustainability", href: "/sustainability", section: "Company", keywords: "recycled materials environment responsible manufacturing" },
   { title: "Representatives", href: "/representatives", section: "Company", keywords: "sales rep agent territory find a rep" },
   { title: "News & Events", href: "/events", section: "Company", keywords: "trade shows iga hd expo conference booth" },
