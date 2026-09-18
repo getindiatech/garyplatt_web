@@ -20,7 +20,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
   { title: "Case Studies", href: "/resources/case-studies", section: "Resources", keywords: "case study installation project detail venue" },
   { title: "Sustainability", href: "/sustainability", section: "Company", keywords: "recycled materials environment responsible manufacturing" },
   { title: "Representatives", href: "/representatives", section: "Company", keywords: "sales rep agent territory find a rep" },
-  { title: "News & Events", href: "/events", section: "Company", keywords: "trade shows iga hd expo conference booth" },
+  { title: "News & Events", href: "/events", section: "Company", keywords: "trade shows iga hd expo conference booth news announcements press" },
   { title: "Career With Us", href: "/careers", section: "Company", keywords: "jobs open positions hiring vacancies apply" },
   { title: "OEM Partnerships", href: "/oem-partnerships", section: "Company", keywords: "original equipment manufacturer partner supply" },
   { title: "Intellectual Property", href: "/intellectual-property", section: "Company", keywords: "patents trademarks designs" },

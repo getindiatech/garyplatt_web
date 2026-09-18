@@ -223,6 +223,22 @@ export interface EventDetail extends EventCard {
   sections: { title: string; items: string[] }[];
 }
 
+export interface NewsPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  coverImage: string | null;
+  coverImageAlt: string | null;
+  author: string | null;
+  publishedAt: string;
+  isFeatured: boolean;
+}
+
+export interface NewsPostDetail extends NewsPost {
+  body: string;
+}
+
 export interface Representative {
   id: string;
   slug: string;
@@ -401,6 +417,10 @@ export const getEvents = (upcoming?: boolean) =>
   get<EventCard[]>(`/events${upcoming === undefined ? "" : `?upcoming=${upcoming}`}`, []);
 
 export const getEvent = (slug: string) => get<EventDetail | null>(`/events/${slug}`, null);
+
+export const getNews = (take = 20) => get<NewsPost[]>(`/news?take=${take}`, []);
+
+export const getPost = (slug: string) => get<NewsPostDetail | null>(`/news/${slug}`, null);
 
 export const getRepresentatives = (segment?: RepSegment) =>
   get<Representative[]>(`/representatives${segment ? `?segment=${segment}` : ""}`, []);

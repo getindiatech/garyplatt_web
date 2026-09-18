@@ -3,7 +3,8 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import { EVENTS_INTRO } from "@/content/company";
-import { getEvents, imageUrl } from "@/lib/api";
+import NewsList from "@/components/sections/NewsList";
+import { getEvents, getNews, imageUrl } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "News & Events",
@@ -19,7 +20,7 @@ const RANGE = new Intl.DateTimeFormat("en-GB", {
 });
 
 export default async function EventsPage() {
-  const events = await getEvents(true);
+  const [events, posts] = await Promise.all([getEvents(true), getNews(7)]);
 
   const GRID = events.map((event) => ({
     slug: event.slug,
@@ -141,6 +142,7 @@ export default async function EventsPage() {
             </article>
           ))}
         </div>
+        <NewsList posts={posts} />
       </Container>
     </>
   );
