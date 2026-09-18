@@ -105,7 +105,7 @@ export default async function ProjectPage({ params }: PageProps<"/resources/case
           </div>
 
           <DocumentList
-            documents={project.documents}
+            documents={project.documents ?? []}
             heading="Download this case study"
             intro="The write-up as a PDF, for sharing with your team."
           />

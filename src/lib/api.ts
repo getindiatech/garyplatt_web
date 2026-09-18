@@ -126,7 +126,8 @@ export interface Product extends ProductCard {
     location: string;
     coverImage: string | null;
   }[];
-  documents: AttachedDocument[];
+  /** Absent on responses cached before attachments existed. */
+  documents?: AttachedDocument[];
 }
 
 export interface CategoryDetail extends CategoryCard {
@@ -196,7 +197,8 @@ export interface ProjectDetail extends ProjectCard {
     heroImage: string | null;
     tagline: string | null;
   }[];
-  documents: AttachedDocument[];
+  /** Absent on responses cached before attachments existed. */
+  documents?: AttachedDocument[];
 }
 
 export interface EventCard {

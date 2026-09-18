@@ -21,7 +21,7 @@ export default async function FeaturedProjects() {
       : PROJECTS.map((project) => ({ ...project, href: "/gallery" }));
 
   return (
-    <Section className="bg-white" id="gallery">
+    <Section className="bg-white" id="projects">
       <Container>
         <SectionHeading
           align="start"

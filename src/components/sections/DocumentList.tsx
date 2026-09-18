@@ -28,17 +28,20 @@ function readableSize(bytes: number | null): string | null {
  * design, so a product without paperwork shows no empty heading.
  */
 export default function DocumentList({
-  documents,
+  documents = [],
   heading = "Downloads",
   intro,
 }: {
-  documents: AttachedDocument[];
+  documents?: AttachedDocument[] | null;
   heading?: string;
   intro?: string;
 }) {
   const [open, setOpen] = useState<string | null>(null);
 
-  if (documents.length === 0) return null;
+  // A response cached before the field existed arrives without it; treat
+  // that the same as "nothing attached" rather than crashing the page.
+  const list = documents ?? [];
+  if (list.length === 0) return null;
 
   return (
     <section className="pt-14">
@@ -48,7 +51,7 @@ export default function DocumentList({
       {intro ? <p className="pt-3 text-copy leading-relaxed text-muted">{intro}</p> : null}
 
       <ul className="mt-6 flex flex-col gap-4">
-        {documents.map((doc) => {
+        {list.map((doc) => {
           const previewing = open === doc.slug;
           const size = readableSize(doc.sizeBytes);
           const src = imageUrl(doc.fileUrl);
