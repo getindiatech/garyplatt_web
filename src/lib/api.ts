@@ -11,7 +11,10 @@
  */
 
 export const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api/v1"
+  // Server-only. The browser bundle inlines this as empty and uses the public URL.
+  process.env.API_URL_INTERNAL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:4000/api/v1"
 ).replace(/\/$/, "");
 
 /** How long a cached read stays fresh, in seconds. */

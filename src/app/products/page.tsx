@@ -35,8 +35,7 @@ export default async function ProductsPage() {
         title="Products"
         crumbs={[
           { label: "Home", href: "/" },
-          { label: "Products", href: "/products" },
-          { label: "Casino" },
+          { label: "Products" },
         ]}
       />
 

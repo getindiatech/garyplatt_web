@@ -94,8 +94,8 @@ export const FOOTER_COLUMNS = [
   {
     heading: "Products",
     links: [
-      { label: "Gaming Seating", href: "/products" },
-      { label: "Hospitality Seating", href: "/products" },
+      { label: "Casino Seating", href: "/products/casino" },
+      { label: "Hospitality Seating", href: "/products/hospitality" },
       { label: "Sustainability", href: "/sustainability" },
       { label: "Projects", href: "/gallery" },
       { label: "Gallery", href: "/gallery" },

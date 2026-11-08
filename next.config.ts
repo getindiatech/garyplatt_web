@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
-/** Backend origin, derived from the API URL (…/api/v1 -> …). */
-const API_ORIGIN = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api/v1")
+/**
+ * Where /uploads is fetched from. Defaults to the public API origin.
+ * In production set API_ORIGIN=http://127.0.0.1:4000 so the rewrite stays on
+ * the machine and does not loop back through nginx.
+ */
+const API_ORIGIN = (
+  process.env.API_ORIGIN ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  "http://localhost:4000/api/v1"
+)
   .replace(/\/api\/v\d+\/?$/, "")
   .replace(/\/$/, "");
 

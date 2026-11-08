@@ -20,21 +20,33 @@ export type ProcessStep = { number: string; title: string; body: string };
 
 /** Hero copy — V2 headline and the two-button action row. */
 export const HERO = {
-  eyebrow: "Est. 1985",
-  title: "Sit down and feel",
-  titleAccent: "the difference",
-  lead: "Where European craftsmanship meets contemporary design. We curate exceptional interiors that tell your unique story.",
-  primary: { label: "Explore Services", href: "#services" },
-  secondary: { label: "View Projects", href: "#projects" },
+  eyebrow: "Casino Performance Seating",
+  title: "Simply the",
+  titleAccent: "Best",
+  lead: "Every chair in Gary Platt’s collection of performance casino seating is hand-crafted to perfection, bringing unsurpassed comfort to each player’s gaming experience. With more than 40 years delivering ergonomically sculpted seating, Gary Platt chairs are simply the best.",
+  primary: { label: "Explore Chairs", href: "#products" },
+  secondary: { label: "Customize a Seat", href: "/products/quote?product=monaco" },
 };
+
+/** Homepage order on garyplatt.com, featured Monaco first. */
+export const HOME_LINEUP = [
+  "monaco",
+  "kiara",
+  "genesis",
+  "lido-revo",
+  "bella",
+  "sedona",
+  "savannah",
+  "lugano-casino",
+];
 
 /** "Designed For Every Experience" — replaces the old Premium Services trio. */
 export const EXPERIENCES: Experience[] = [
   {
-    title: "Gaming",
-    body: "Seating solutions built for casinos, sportsbooks, gaming lounges and more.",
-    cta: "Explore Gaming",
-    href: "/products/gaming",
+    title: "Casino",
+    body: "Performance seating for casino floors, from standard chairs to luxury, benches and sportsbook.",
+    cta: "Explore Casino",
+    href: "/products/casino",
     icon: "/images/icon-experience-gaming.svg",
     image: "/images/experience-gaming.jpg",
     alt: "Casino gaming floor lined with slot machines",

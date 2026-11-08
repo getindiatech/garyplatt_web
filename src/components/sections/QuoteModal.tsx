@@ -19,6 +19,7 @@ type QuoteModalProps = {
   onClose: () => void;
   productSlug: string;
   productName: string;
+  preview?: string;
   selections: QuoteSelection[];
 };
 
@@ -27,6 +28,7 @@ export default function QuoteModal({
   onClose,
   productSlug,
   productName,
+  preview,
   selections,
 }: QuoteModalProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +50,12 @@ export default function QuoteModal({
       street: String(form.get("street") ?? "") || undefined,
       city: String(form.get("city") ?? "") || undefined,
       country: String(form.get("country") ?? "") || undefined,
-      message: String(form.get("message") ?? ""),
+      message: [
+        String(form.get("message") ?? "").trim(),
+        selections.map((item) => `${item.label}: ${item.value}`).join("\n"),
+      ]
+        .filter(Boolean)
+        .join("\n\n"),
       productSlug,
       source: "configurator",
       selections: selections.map(({ groupSlug, valueSlug }) => ({ groupSlug, valueSlug })),
@@ -122,7 +129,7 @@ export default function QuoteModal({
           <div className="rounded-lg bg-[#fafafa] p-6">
             <div className="relative mx-auto aspect-[260/264] w-full max-w-[260px]">
               <Image
-                src={QUOTE_PRODUCT.preview}
+                src={preview || QUOTE_PRODUCT.preview}
                 alt={`${productName} configured`}
                 width={260}
                 height={264}

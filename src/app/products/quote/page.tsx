@@ -4,7 +4,9 @@ import Link from "next/link";
 import PageHero from "@/components/ui/PageHero";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Eyebrow from "@/components/ui/Eyebrow";
-import SeatConfigurator from "@/components/sections/SeatConfigurator";
+import ChairBuilder, { type ChairVariant } from "@/components/sections/ChairBuilder";
+import PlainQuote from "@/components/sections/PlainQuote";
+import builders from "@/content/chair-builders.json";
 import DocumentList from "@/components/sections/DocumentList";
 import { MORE_COLLECTION, QUOTE_PRODUCT } from "@/content/quote";
 import { getProduct, getProducts, imageUrl } from "@/lib/api";
@@ -49,17 +51,6 @@ export default async function SendQuotePage({
   const configurable = {
     slug: product?.slug ?? "",
     name: product?.name ?? QUOTE_PRODUCT.name,
-    views: [
-      imageUrl(product?.heroImage, QUOTE_PRODUCT.preview),
-      ...(product?.images ?? []).map((image) => imageUrl(image.url)),
-    ].filter(Boolean),
-    optionGroups: (product?.optionGroups ?? []).map((group) => ({
-      ...group,
-      values: group.values.map((value) => ({
-        ...value,
-        image: value.image ? imageUrl(value.image) : null,
-      })),
-    })),
   };
 
   const more = related.data
@@ -85,7 +76,20 @@ export default async function SendQuotePage({
 
       <div className="px-gutter pb-section">
         <div className="mx-auto max-w-[1680px]">
-          <SeatConfigurator product={configurable} />
+          {product && (builders as Record<string, ChairVariant[]>)[product.slug]?.length ? (
+            <ChairBuilder
+              productName={product.name}
+              productSlug={product.slug}
+              fallbackImage={imageUrl(product.heroImage, QUOTE_PRODUCT.preview)}
+              variants={(builders as Record<string, ChairVariant[]>)[product.slug]}
+            />
+          ) : (
+            <PlainQuote
+              productName={configurable.name}
+              productSlug={configurable.slug}
+              image={imageUrl(product?.heroImage, QUOTE_PRODUCT.preview)}
+            />
+          )}
 
           {/* ===== Product detail ===== */}
           <div className="grid grid-cols-1 gap-10 pt-16 lg:grid-cols-[740fr_586fr] lg:gap-16">
@@ -93,12 +97,16 @@ export default async function SendQuotePage({
               <h2 className="font-display text-[clamp(1.75rem,1.6vw+1.2rem,2.25rem)] font-medium leading-tight text-ink">
                 {configurable.name}
               </h2>
-              <p className="pt-2 text-copy font-medium leading-normal text-muted-alt">
-                {product?.tagline ?? QUOTE_PRODUCT.tagline}
-              </p>
-              <p className="whitespace-pre-line pt-6 text-copy leading-relaxed text-muted">
-                {product?.description ?? QUOTE_PRODUCT.body}
-              </p>
+              {product?.tagline ? (
+                <p className="pt-2 text-copy font-medium leading-normal text-muted-alt">
+                  {product.tagline}
+                </p>
+              ) : null}
+              {product?.description ? (
+                <p className="whitespace-pre-line pt-6 text-copy leading-relaxed text-muted">
+                  {product.description}
+                </p>
+              ) : null}
               {product?.minOrderQty ? (
                 <p className="pt-6 text-copy leading-relaxed text-muted">
                   Minimum order quantity: {product.minOrderQty} units.
@@ -106,31 +114,21 @@ export default async function SendQuotePage({
               ) : null}
             </div>
 
-            <div className="flex flex-col gap-5">
-              <div className="relative aspect-[586/320] w-full overflow-hidden">
-                <Image
-                  src={large.src}
-                  alt={configurable.name}
-                  width={large.w}
-                  height={large.h}
-                  sizes="(max-width: 1023px) 100vw, 35vw"
-                  className="size-full object-cover"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-5">
-                {details.map((image) => (
-                  <div key={image.src} className="relative aspect-[282/154] overflow-hidden">
-                    <Image
-                      src={image.src}
-                      alt={`${configurable.name} detail`}
-                      width={image.w}
-                      height={image.h}
-                      sizes="(max-width: 1023px) 50vw, 18vw"
-                      className="size-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-2 gap-5">
+              {(product?.images?.length
+                ? product.images.slice(0, 4).map((image) => imageUrl(image.url))
+                : [large.src, ...details.map((image) => image.src)]
+              ).map((src) => (
+                <div key={src} className="relative aspect-[4/3] overflow-hidden bg-surface">
+                  <Image
+                    src={src}
+                    alt={configurable.name}
+                    fill
+                    sizes="(max-width: 1023px) 50vw, 18vw"
+                    className="object-contain"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 

@@ -4,22 +4,25 @@ import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ArrowLink from "@/components/ui/ArrowLink";
-import { PRODUCTS } from "@/content/home";
+import { HOME_LINEUP, PRODUCTS } from "@/content/home";
 import { getProducts, imageUrl } from "@/lib/api";
 
 export default async function FeaturedCollection() {
-  const featured = await getProducts({ featured: "true", perPage: 4 });
+  const catalogue = await getProducts({ perPage: 100 });
+  const bySlug = new Map(catalogue.data.map((product) => [product.slug, product]));
+  const lineup = HOME_LINEUP.map((slug) => bySlug.get(slug)).filter((product) => product != null);
 
-  // Fall back to the design's line-up until an editor flags products as featured.
+  // The homepage order matches garyplatt.com. Fall back only if the API is empty.
   const items =
-    featured.data.length > 0
-      ? featured.data.map((product) => ({
+    lineup.length > 0
+      ? lineup.map((product) => ({
           title: product.name,
+          tagline: product.tagline,
           image: imageUrl(product.heroImage, "/images/product-nyx-armchair.png"),
           alt: product.tagline ?? product.name,
-          href: `/products/${product.category.slug}`,
+          href: `/products/quote?product=${product.slug}`,
         }))
-      : PRODUCTS.map((product) => ({ ...product, href: "/products/casino" }));
+      : PRODUCTS.map((product) => ({ ...product, tagline: null, href: "/products/casino" }));
 
   return (
     <Section className="bg-white" id="products">
@@ -37,12 +40,12 @@ export default async function FeaturedCollection() {
         />
 
         <div className="mt-8 grid grid-cols-2 gap-3 xl:mt-16 xl:grid-cols-4 xl:gap-6">
-          {items.map(({ title, image, alt, href }) => (
+          {items.map(({ title, tagline, image, alt, href }) => (
             <article
               key={title}
               className="flex flex-col gap-[clamp(0.9rem,1.7vw,2rem)] border-[0.447px] border-card-border bg-white p-[clamp(0.56rem,1vw,1.25rem)] transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(3,7,18,0.18)] md:border"
             >
-              <div className="relative aspect-square w-full overflow-hidden">
+              <Link href={href} className="relative aspect-square w-full overflow-hidden">
                 <Image
                   src={image}
                   alt={alt}
@@ -51,12 +54,17 @@ export default async function FeaturedCollection() {
                   sizes="(max-width: 1279px) 45vw, 23vw"
                   className="size-full object-contain"
                 />
-              </div>
+              </Link>
 
               <div className="flex items-center justify-between gap-3">
-                <h3 className="min-w-0 font-display text-[clamp(0.875rem,1.2vw+0.4rem,1.625rem)] font-medium leading-tight text-black md:whitespace-nowrap">
-                  {title}
-                </h3>
+                <div className="min-w-0">
+                  <h3 className="font-display text-[clamp(0.875rem,1.2vw+0.4rem,1.625rem)] font-medium leading-tight text-black">
+                    {title}
+                  </h3>
+                  {tagline ? (
+                    <p className="pt-1 text-[11px] uppercase tracking-[0.14em] text-muted">{tagline}</p>
+                  ) : null}
+                </div>
                 <Link
                   href={href}
                   aria-label={title}

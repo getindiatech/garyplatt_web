@@ -18,22 +18,6 @@ export const PRODUCT_CATEGORIES: ExperienceCardProps[] = [
     image: "/images/product-cat-hospitality.jpg",
     alt: "Hotel lounge with upholstered seating",
   },
-  {
-    title: "Gaming",
-    body: "Seating solutions built for casinos, sportsbooks, gaming lounges and more.",
-    cta: "Explore Gaming",
-    href: "/products/gaming",
-    image: "/images/product-cat-gaming.jpg",
-    alt: "Gaming stools at a casino bar",
-  },
-  {
-    title: "Service Table",
-    body: "Elevating comfort in hotels, restaurants, lounges, theatres and beyond.",
-    cta: "Explore Service Table",
-    href: "/products/service-table",
-    image: "/images/product-cat-service-table.jpg",
-    alt: "Service tables in a hospitality setting",
-  },
 ];
 
 /**
@@ -51,16 +35,6 @@ export const PRODUCT_CATEGORY_PAGES = {
     name: "Hospitality",
     intro:
       "Chairs, stools and banquettes for hotels, restaurants, lounges and theatres, finished to match the room rather than fight it.",
-  },
-  gaming: {
-    name: "Gaming",
-    intro:
-      "Slot, table and bar seating engineered around the machine, with swivel, lift and footrest options across the range.",
-  },
-  "service-table": {
-    name: "Service Table",
-    intro:
-      "Service tables and companion pieces that complete a floor plan, built in the same materials and finishes as the seating.",
   },
 } as const;
 

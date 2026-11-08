@@ -5,14 +5,11 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Button from "@/components/ui/Button";
 import { getPage } from "@/lib/api";
 
-/**
- * The design's figures, kept so the band still reads. They are the template's
- * invention, not Gary Platt's numbers - replace them in the dashboard.
- */
+/** Figures taken from the garyplatt.com homepage, not the design template. */
 const STATS = [
-  { value: "38+", label: "Years of Excellence" },
-  { value: "2,500+", label: "Projects Completed" },
-  { value: "95%", label: "Client Satisfaction" },
+  { value: "40+", label: "Years of seating" },
+  { value: "Reno", label: "Built in Nevada" },
+  { value: "X2", label: "Tended Play series" },
 ];
 
 export default async function About() {
@@ -50,11 +47,11 @@ export default async function About() {
 
             <div className="absolute bottom-5 right-6 flex flex-col gap-2 border border-hairline bg-white p-[9px] md:bottom-auto md:left-[calc(-1*min(2vw,1.5rem))] md:right-auto md:top-12 md:w-[clamp(6.5rem,8vw,7.55rem)] md:gap-0 md:p-6">
               <p className="font-display text-[clamp(1.125rem,1vw+0.6rem,1.875rem)] leading-tight text-ink">
-                38
+                40+
               </p>
               <p className="text-meta leading-normal text-muted">
                 Years of
-                <br className="hidden md:inline" /> Excellence
+                <br className="hidden md:inline" /> seating
               </p>
             </div>
           </div>
